@@ -13,13 +13,57 @@ Applicability: These cooperation terms apply automatically to every Selleris cli
 
 Acceptance: A client is deemed to have accepted these cooperation terms by creating ("posting") a task in the Selleris client portal at `my.selleris.com` or by continuing to use the portal after publication of an updated version. If a client cannot use the portal for technical reasons, a temporary alternative must be mutually confirmed in writing; otherwise the standard acceptance trigger does not change.
 
-Mission Alignment (Draft): Enable predictable, transparent, and secure delivery of value while minimizing friction in communication and prioritization. (Will be refined.)
+Mission Alignment: Deliver measurable, real business value to clients by transforming every approved task into a discrete, reviewable asset (code or documented artifact) within a transparent planning that provides clear roadmaps, committed delivery plans, and traceable outcomes.
 
 ## 2. Scope of Engagement
-- Engagement Models: (e.g., Fixed Scope / Time & Materials / Retainer) – TODO details.
-- Deliverable Types: Software components, integrations, advisory, support.  
-- Out of Scope Examples: Infrastructure hosting (unless agreed), third‑party licensing, legal compliance certification.  
-TODO: Add model comparison table.
+- Engagement Models (Authoritative): Selleris deliberately supports only two commercial delivery models (a) Time & Materials (T&M), (b) Project Stage Model (fixed, pre-approved task set). This constraint preserves transparency, minimizes contractual complexity, and ensures every delivered unit is a discrete, inspectable asset (see Mission Alignment).
+- Deliverable Types: Software source code, configuration, integration adapters, scripts, technical/design documentation, advisory analysis, operational improvements, incident mitigation artifacts.
+- Out of Scope Examples (unless expressly agreed): Infrastructure hosting / managed cloud operations, software licensing of third-party products, legal or regulatory certification, bespoke penetration testing, end-user training beyond documented handover, data entry / content population.
+
+### 2.1 Time & Materials (T&M) Model
+Purpose: Flexible, iterative flow of work where prioritization can shift sprint-to-sprint without renegotiating fixed scope.
+Key Characteristics:
+- Task-Level Commitment: Each approved task is an independent commercial unit (minimum billable increment rules apply – Section 12).
+- Flexibility: High; backlog adjusted via task creation, re-estimation, or cancellation before start.
+- Billing Trigger: Hours actually spent on tasks accepted/confirmed within the calendar month (Section 12.4.1).
+- Change Handling: Simply shape new or revised tasks; no formal CR unless tied to an approved Stage.
+- Risk Allocation: Scope / volume risk primarily on client (they control intake); delivery quality risk on Selleris.
+Inclusions: Engineering, code review, lightweight documentation, coordination, small discovery spikes (XS/S).  
+Exclusions: Large pre-project discovery (handled as Stage if packaged), guaranteed reserved capacity (unless separately reserved), fixed milestone commitments.
+
+### 2.2 Project Stage Model
+Purpose: Predictable delivery of a well-defined feature set or phase where upfront clarity enables coordinated release or investment decisions.
+Key Characteristics:
+- Stage Definition: Finite, enumerated task list (each task remains discrete) with consolidated estimate and acceptance criteria.
+- Billing Trigger: 50% upfront, 50% after all Stage tasks accepted (Section 12.4.2).
+- Scope Control: Additions / alterations require a formal Change Request or deferral to a subsequent Stage.
+- Flexibility: Lower than T&M during execution; higher predictability of commercial exposure.
+- Risk Allocation: Estimate / efficiency risk partially shared—Selleris commits to structured scope; client commits to stable requirements.
+Inclusions: Engineering, agreed documentation, handover session(s), internal QA.  
+Exclusions: Continuous backlog grooming beyond Stage scope, emergent features not listed at approval.
+
+### 2.3 Model Comparison
+| Criterion | T&M | Project Stage |
+|----------|-----|---------------|
+| Primary Use Case | Ongoing evolution, support, incremental improvements | Cohesive feature release / milestone package |
+| Scope Flexibility During Execution | High – tasks can be added/removed anytime pre-start | Low – locked; changes via CR or next Stage |
+| Cost Predictability (Per Period) | Variable (driven by approved tasks) | High (pre-approved financial exposure) |
+| Start Lead Time | Minimal (task creation & approval) | Moderate (scoping + consolidation + approval) |
+| Change Handling | Create/adjust tasks; re-estimate | Formal CR or defer |
+| Billing Trigger | Accepted tasks hours in month | 50% upfront / 50% on acceptance |
+| Risk of Scope Creep | Managed by task gating | Mitigated by locked Stage boundary |
+| Ideal for Uncertainty Level | Higher uncertainty / evolving product | Lower uncertainty / well-understood scope |
+| Cancellation Impact | Stop creating/approving tasks | Requires Stage amendment or termination clause |
+
+### 2.4 Selecting a Model
+- Choose T&M when discovery continues, priorities may shift, or rapid iteration matters more than fixed financial caps.
+- Choose Project Stage when aligning cross-team launches, budgeting for a defined deliverable, or when executive stakeholders need a bounded commitment.
+- Combination: A client can run one or more Stages while still submitting T&M tasks for unrelated incremental improvements (governed by Section 12.4.3).
+
+### 2.5 Governance Alignment
+Both models enforce the principle of discrete, measurable output per task. No “continuous vague service” classification exists; if sustained capacity is needed, it is still expressed as a series of tasks (T&M) or successive Stages.
+
+No additional engagement forms (e.g., generic retainers or indefinite support subscriptions) are offered unless incorporated as structured Stages or pre-approved T&M task sequences.
 
 ## 3. Roles & Responsibilities
 | Role | Selleris Responsibilities (Draft) | Client Responsibilities (Draft) |
@@ -126,7 +170,7 @@ TODO: Add business hours & holiday calendar reference once finalized.
 - After-Hours / Overtime Rate: 2× Base Hourly Rate (EUR 120/hour) for: (a) any work performed outside Business Hours (Section 4), (b) weekends, and (c) Poland public holidays, except where the parties have agreed to an alternative support retainer or fixed extended coverage.
 - Billing Models: Time & Materials (hourly / daily), Fixed Scope milestones, Retainer packages.  
 - Invoicing Frequency: TODO (e.g., monthly in arrears for T&M; milestone-based for Fixed Scope).  
-- Payment Terms: TODO (e.g., Net 15 / Net 30) from invoice date.  
+- Payment Terms: Defined per model below (Section 12.4).  
 - Expenses: Pre‑approved only; pass-through at cost with receipts (draft).  
 - Currency: EUR is default; alternative currency requires prior written agreement (FX risk allocation TBD).  
 - Rate Changes: Selleris may adjust standard rates with 30 days written notice; locked rates in active SOWs remain until SOW completion or renewal.
@@ -150,6 +194,68 @@ Overtime Authorization: Non-Critical after-hours work requires explicit written 
 Late Payment Handling (Placeholder): Interest, suspension triggers, and reactivation fees to be defined.
 
 TODO: Finalize invoicing schedule, payment term, late fee policy, tax treatment (e.g., VAT applicability).
+
+### 12.4 Payment Models
+Clients may freely choose either (or both concurrently) of the following payment models. A task is associated with exactly one model at creation via a required classification field (e.g., label: `T&M` or `Project`).
+
+#### 12.4.1 Time & Materials (T&M) Monthly Model
+- Scope: All ad hoc, iterative, or flow-based tasks not bound to a prepaid milestone.
+- Recording: Actual engineering & related effort (including review, coordination) logged against each task.
+- Invoicing Cycle: Aggregated monthly for all T&M tasks completed (status: Confirmed by client) within the calendar month.
+- Invoice Issue: Issued within the first 3 business days of the following month.
+- Payment Due Date: Payment due no later than the 15th calendar day of the following month (effectively Net 15 from invoice issuance if issued on day 1).
+- Disputed Lines: Client must flag any disputed line item within 7 calendar days of invoice date. Undisputed remainder remains payable by the due date.
+- Partial Completions (Rollover Policy): Tasks are expected to be sized to finish within a sprint; however, if a task remains open at month end due primarily to client-side delay (feedback, approvals, access) or external dependency outside Selleris control, then:
+	1. Selleris posts a Month-End Rollover Note summarizing the completed functional subset, hours consumed, blockers, and residual scope.
+	2. Completed scope is accepted (explicitly or deemed accepted if no blocking feedback within 5 business days where only client feedback is pending).
+	3. Logged hours to date are billed in that month's invoice.
+	4. Remaining scope is re-estimated and migrated to a NEW continuation task linking back to the original.
+	5. Original task is closed with status "Partially Accepted (Rollover)" to preserve auditability.
+	6. Repeated rollover of similar categories (>2 consecutive months or >2 occurrences per quarter) triggers a mandatory decomposition & process review.
+	Tasks delayed by Selleris internal causes do NOT trigger partial billing; instead they remain in progress and are completed before billing (unless mutually agreed otherwise in writing).
+
+#### 12.4.2 Project (Milestone / Stage) Model
+- Use Case: Larger, well-defined feature sets or phases where upfront commitment benefits planning.
+- Stage Definition: A Stage groups a fixed set of tasks with clear acceptance criteria and a consolidated estimate (sum of constituent tasks; each still independently tracked).
+- Estimation & Approval Flow: (a) Draft stage task list + assumptions; (b) Consolidated hour estimate + risk notes; (c) Client approval (written confirmation in portal); (d) Commercial terms locked for the Stage scope.
+- Payment Structure: 50% upfront (invoice issued immediately upon Stage approval, payable before execution begins) and 50% upon acceptance of all Stage tasks (final invoice issued after last task marked Accepted).
+- Scope Integrity: Adds / changes after approval form a Change Request either (a) added to a subsequent Stage, or (b) explicitly appended with revised financials (requires mutual written consent).
+- Acceptance: Stage considered accepted when every Stage task is in Accepted (or explicitly waived) status. Minor residual non-blocking adjustments may be tracked as new T&M tasks if both parties agree.
+- Non-Acceptance: If acceptance is withheld, client must provide a consolidated defect / gap list within 5 business days; unresolved silence after that window may trigger deemed acceptance (optional—TBD if adopted contractually).
+
+#### 12.4.3 Mixed Model Operation
+- Coexistence: A client may maintain simultaneous T&M flow for incremental improvements while executing one or more Project Stages in parallel.
+- Separation of Tracking: Each task must not switch models mid-life. If a T&M task becomes part of an approved Stage, it is closed (with any completed work billed under T&M) and re-created under the Stage before further effort.
+- Reporting: Invoices clearly separate T&M summary (hours × rate) and Project Stage milestone payments.
+- Priority Interaction: Model classification does not override SLA priority definitions; Critical issues within a Stage may still be addressed immediately. If a Critical issue is Stage-related, remediation effort counts toward Stage scope unless caused by an out-of-scope change.
+
+#### 12.4.4 Example Classification Labels
+| Label | Meaning |
+|-------|---------|
+| model:tm | Standard monthly T&M task |
+| model:project | Task belongs to an approved Stage / milestone |
+| stage:<identifier> | Groups tasks under a specific Stage (e.g., stage:alpha-launch) |
+
+#### 12.4.5 Model Selection Guidance
+- Choose T&M for exploratory, iterative backlog growth, support, maintenance.
+- Choose Project for predictable, contiguous work packages with defined ROI / release goals.
+- Use Mixed when a strategic initiative (Project) runs while continuous improvements (T&M) must not stall.
+
+#### 12.4.6 Financial Governance Notes (Draft)
+- Upfront Stage payment is non-refundable except where Selleris fails to initiate Stage work within an agreed reasonable start window.
+- Material Stage underspend (if actual effort < 80% of estimate) may be converted—subject to mutual agreement—into T&M credit or applied to the next Stage.
+- Stage overrun risk must be signaled immediately if forecast effort > 110% of estimate; client options: descoping, CR, or conversion of remainder to T&M.
+
+TODO: Define late payment interest rate & suspension thresholds.
+
+#### 12.4.7 Month-End Rollover Governance (Extended Tasks)
+This governance clarifies boundaries around the Partial Completions policy:
+- Proper Sizing Principle: Rollover is an exception, not a planning tool; tasks should normally conform to Section 12A sizing.
+- Non-Eligible Causes: Overscoping, avoidable internal delays, or lack of proactive decomposition by Selleris.
+- Eligible Causes: Awaiting client domain clarification, pending stakeholder approval, delayed test data, external vendor API outage.
+- Documentation Requirements: Rollover Note must include (a) link to original task, (b) list of delivered acceptance criteria, (c) list of pending criteria with rationale, (d) hour tally, (e) revised estimate for remainder.
+- Transparency Option: Client may request conversion of the remainder into a Stage (Project Model) if predictability is desired.
+- Metrics & Continuous Improvement: If rollover rate breaches a jointly agreed KPI threshold, a corrective action plan (CAP) is drafted.
 
 ## 12A. Estimation & Work Decomposition (Draft)
 
@@ -239,7 +345,9 @@ TODO: Define preferred governing law / venue.
 | 0.2.0-draft | 2025-09-23 | Selleris Docs | Added applicability, acceptance mechanics, communication channels, SLA first response rules & priority definitions |
 | 0.3.0-draft | 2025-09-23 | Selleris Docs | Added business hours (Europe/Warsaw), SLA business-hours counting clarification, base & after-hours rates, pricing section expansion |
 | 0.4.0-draft | 2025-09-23 | Selleris Docs | Added minimum billing increment, auto-start rule, estimation & t-shirt sizing, decomposition best practices |
-| 0.3.0-draft | 2025-09-23 | Selleris Docs | Added business hours (Europe/Warsaw), SLA business-hours counting clarification, base & after-hours rates, pricing section expansion |
+| 0.5.0-draft | 2025-09-23 | Selleris Docs | Added payment models (T&M monthly, Project 50/50), mixed model rules, financial governance |
+| 0.6.0-draft | 2025-09-23 | Selleris Docs | Added T&M month-end rollover policy & governance for extended tasks |
+| 0.7.0-draft | 2025-09-23 | Selleris Docs | Finalized mission alignment statement |
 
 ## 19. Glossary (Draft)
 | Term | Definition (Placeholder) |
