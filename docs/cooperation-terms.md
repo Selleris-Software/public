@@ -169,8 +169,55 @@ Data / Migration Impact: N/A (derives from existing sales table; no schema chang
 - Avoid embedding large discussions in criteria; keep them in comment thread—criteria reflect final agreed snapshot.
 - Functional Criteria should focus on externally verifiable outcomes rather than internal implementation details.
 
-### 5.4 Definition of Done (Preview)
-The formal Definition of Done matrix will follow (separate subsection) and ties directly to ensuring every Acceptance Criterion is satisfiable, testable, and evidenced. (Will be expanded in a subsequent revision.)
+### 5.4 Definition of Done
+Purpose: Provide a consistent, minimal, testable standard so that every completed task (or Stage task) is (a) objectively reviewable, (b) production‑deployable (subject to release scheduling), and (c) traceably evidenced without re‑negotiation. A task is not “Done” until all applicable criteria below are met. Where an item is Not Applicable (N/A), this must be explicitly stated in the task comment or PR description.
+
+| # | Category | Requirement (Baseline) | Evidence / Verification | N/A Allowed? | Notes / Exceptions |
+|---|----------|------------------------|-------------------------|--------------|--------------------|
+| 1 | Acceptance Criteria | Every listed Functional & Non‑Functional Acceptance Criterion (Section 5.1/5.2) satisfied exactly as written (or formally updated & approved before closure). | PR description or task comment cross‑referencing each criterion (checklist or inline). | No | If a criterion is re‑scoped, update task first — never silently diverge. |
+| 2 | Business Outcome Validity | Original Business Outcome statement still accurate (has not been invalidated by solution pivot). | Brief confirmation line in PR/task. | Yes | If outcome changes materially, amend task before merge. |
+| 3 | Code Review | Merged via protected branch with required reviewer approvals (≥ 1 technical peer; security reviewer if flagged). | Git platform metadata (merge record). | No | Emergency hotfix may merge with expedited review; post‑merge review required within 1 business day. |
+| 4 | Tests (Automated) | New or changed logic covered by appropriate unit/integration tests; all pipelines green. | CI run success, test report link. | Conditional | XS tasks that only adjust copy / comments may mark test addition N/A; must state rationale. |
+| 5 | Regression Safety | No existing tests broken without justified update; backward compatibility explicitly stated if public API altered. | Diff + test updates + note “No breaking changes” or documented impact. | No | For intentional breaking change, follow Change Management process. |
+| 6 | Static / Lint / Formatting | Linting, static analysis, formatting, type checks (if applicable) pass with zero new warnings above allowed baseline. | CI quality gate. | No | Temporary suppression requires task note + follow‑up task reference. |
+| 7 | Security & Secrets | No hard‑coded secrets; dependency scan shows no new S1/S2 vulnerabilities introduced; secure configuration follows existing patterns. | Dependabot / code scan output (implicit) + “No new High vulns” note. | No | If an upstream High vuln unavoidable, documented mitigation & follow‑up task required before closure. |
+| 8 | Vulnerability Debt | Any pre‑existing High/Critical issue touched is not worsened; if discovered during work, logged as separate task before closure. | Reference to created task ID or “None found” statement. | No | Keeps scope bounded while ensuring visibility. |
+| 9 | Logging & Observability | Sufficient logging / metrics / tracing added or existing coverage deemed adequate for diagnosing the new behavior. | PR notes listing added log line(s) or “Existing telemetry sufficient”. | Yes | Avoid verbose / PII logs; follow privacy rules. |
+|10 | Data & Migrations | Schema / data migrations are idempotent, reversible (or irreversibility explicitly documented + rollback plan), and versioned. | Migration script in repo; rollback note. | Conditional | If no data change, mark “N/A – no schema change”. |
+|11 | Feature Flags / Config | New capability behind a flag or clearly documented default config when warranted; default state declared. | Flag name + default state in task. | Yes | Small internal refactors may mark N/A. |
+|12 | Performance / Budget Guardrails | Any defined performance NFR met; no material negative impact (measured or reasoned). | Benchmark snippet or rationale note. | Conditional | If no NFR specified and low risk, mark N/A. |
+|13 | Accessibility / UX (If UI) | UI changes respect baseline accessibility guidelines (contrast, keyboard nav, labels). | Screenshot / manual check summary. | Conditional | Backend-only tasks: N/A. |
+|14 | Documentation & README | User / operator documentation updated OR explicit “N/A (internal change only)” recorded. | Link to updated doc or N/A note. | Conditional | Inline code comments alone ok for purely internal refactor. |
+|15 | Configuration & Secrets Handling | New environment variables named & described (without secret values) and added to configuration reference list. | Config reference update. | Conditional | N/A if no new config. |
+|16 | Licensing / OSS | Third‑party additions use acceptable licenses; NOTICE / attribution updated if required. | Dependency list diff or SBOM updated (if maintained). | Conditional | N/A if no new deps. |
+|17 | Risk & Assumptions Update | Newly discovered material risk or assumption recorded (Section 14 / risk register). | Task comment referencing added entry. | Conditional | Minor/obvious risks can be omitted with rationale. |
+|18 | Open Defects | No unresolved S1/S2 defects caused by the change; known S3+ documented with follow‑up task ID. | Linked defect tasks or confirmation statement. | No | Prevents shipping critical debt silently. |
+|19 | Deployment Readiness | Build artifact produced (if applicable); deployment steps unchanged or updated instructions provided. | CI artifact link or note “No build artifact (script/docs only)”. | Conditional | Pure documentation tasks: N/A. |
+|20 | Acceptance Evidence | Evidence items specified in the task template (tests, screenshots, sample output) attached or linked. | Attachments / links in task. | No | Must be reviewable without setting up a local dev env. |
+
+#### 5.4.1 Simplified Rules for XS Tasks (≤ 2h)
+To keep very small changes efficient, the following may be implicitly satisfied without separate artifacts provided the task comment states “XS DoD applied”:
+- Tests (if trivial text / styling adjustment) – rely on existing coverage.
+- Documentation (if no externally observable change).
+- Performance note (if risk obviously negligible).
+All other criteria (acceptance, review, security, no S1/S2 defects) remain mandatory.
+
+#### 5.4.2 Handling Non-Compliance
+If any mandatory item cannot be met within current scope (e.g., unavoidable High vulnerability in upstream lib):
+1. Document reason and interim mitigation.
+2. Create follow‑up task with clear resolution target.
+3. Obtain explicit written (task comment) acknowledgment from client Product Owner before marking Done.
+
+#### 5.4.3 Auditability
+Periodic spot checks may sample closed tasks against the Definition of Done. Deviations trigger either retroactive remediation tasks or refinement of internal workflow guidance. Repeated gaps may adjust estimation overhead (Section 12A.8) to restore quality equilibrium.
+
+#### 5.4.4 Relationship to Warranty (Section 7)
+Meeting the Definition of Done does not extend or modify the limited defect remediation obligations. It establishes a quality baseline; latent issues discovered later are handled via the severity process (Section 6) unless they fall within any expressly defined short-term warranty window.
+
+#### 5.4.5 Evolution
+This Definition of Done may be refined (versioned) as tooling, risk posture, or regulatory expectations evolve. Material tightening will be announced via repository change; continued task creation after publication constitutes acceptance of the updated baseline.
+
+End of Definition of Done.
 
 ## 6. Quality & Testing
 - Code Standards: Internal engineering guidelines (public summary TBD).  
