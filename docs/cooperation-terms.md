@@ -6,6 +6,75 @@ Language: English (authoritative)
 
 > NOTE: This is an initial structural draft. Sections marked with TODO will be completed after internal alignment. Do not treat this as the final contractual baseline.
 
+## Table of Contents
+- [1. Purpose](#1-purpose)
+- [2. Scope of Engagement](#2-scope-of-engagement)
+	- [2.1 Time & Materials (T&M) Model](#21-time--materials-tm-model)
+	- [2.2 Project Stage Model](#22-project-stage-model)
+	- [2.3 Model Comparison](#23-model-comparison)
+	- [2.4 Selecting a Model](#24-selecting-a-model)
+	- [2.5 Governance Alignment](#25-governance-alignment)
+- [3. Roles & Responsibilities](#3-roles--responsibilities)
+- [4. Communication & Cadence](#4-communication--cadence)
+- [5. Delivery Process](#5-delivery-process)
+	- [5.1 Minimal Acceptance Criteria Template (Standard)](#51-minimal-acceptance-criteria-template-standard)
+	- [5.2 Example (Illustrative)](#52-example-illustrative)
+	- [5.3 Usage Notes](#53-usage-notes)
+	- [5.4 Definition of Done (Preview)](#54-definition-of-done-preview)
+- [6. Quality & Testing](#6-quality--testing)
+	- [6.1 Defect Severity Classification](#61-defect-severity-classification)
+	- [6.2 Remediation Principles](#62-remediation-principles)
+	- [6.3 Tracking & Reporting](#63-tracking--reporting)
+	- [6.4 Test Coverage Expectations (Baseline)](#64-test-coverage-expectations-baseline)
+	- [6.5 Continuous Improvement](#65-continuous-improvement)
+- [7. Intellectual Property (IP)](#7-intellectual-property-ip)
+- [8. Confidentiality & Data Protection](#8-confidentiality--data-protection)
+- [9. Security & Compliance](#9-security--compliance)
+- [10. Change Management](#10-change-management)
+- [11. Service Levels](#11-service-levels)
+	- [11.1 Priority Definitions](#111-priority-definitions)
+	- [11.2 First Response SLA (Initial Acknowledgement)](#112-first-response-sla-initial-acknowledgement)
+	- [11.3 Future Additions (Placeholders)](#113-future-additions-placeholders)
+- [12. Pricing & Invoicing (Draft)](#12-pricing--invoicing-draft)
+	- [12.1 Task Acceptance & Authorization Rules](#121-task-acceptance--authorization-rules)
+	- [12.2 Estimation Transparency](#122-estimation-transparency)
+	- [12.3 Minimum Billing Increment Rationale](#123-minimum-billing-increment-rationale)
+	- [12.4 Payment Models](#124-payment-models)
+		- [12.4.1 Time & Materials (T&M) Monthly Model](#1241-time--materials-tm-monthly-model)
+		- [12.4.2 Project (Milestone / Stage) Model](#1242-project-milestone--stage-model)
+		- [12.4.3 Mixed Model Operation](#1243-mixed-model-operation)
+		- [12.4.4 Example Classification Labels](#1244-example-classification-labels)
+		- [12.4.5 Model Selection Guidance](#1245-model-selection-guidance)
+		- [12.4.6 Financial Governance Notes (Draft)](#1246-financial-governance-notes-draft)
+		- [12.4.7 Month-End Rollover Governance (Extended Tasks)](#1247-month-end-rollover-governance-extended-tasks)
+- [12A. Estimation & Work Decomposition (Draft)](#12a-estimation--work-decomposition-draft)
+	- [12A.1 T‑Shirt Size Mapping (Indicative)](#12a1-tshirt-size-mapping-indicative)
+	- [12A.2 Sprint Fit Rule](#12a2-sprint-fit-rule)
+	- [12A.3 Recommended Decomposition Strategies](#12a3-recommended-decomposition-strategies)
+	- [12A.4 Estimation Quality Practices](#12a4-estimation-quality-practices)
+	- [12A.5 Re-Estimation Triggers](#12a5-re-estimation-triggers)
+	- [12A.6 Out-of-Band Changes](#12a6-out-of-band-changes)
+	- [12A.7 Client Collaboration](#12a7-client-collaboration)
+	- [12A.8 Estimation Workflow & Cost Composition](#12a8-estimation-workflow--cost-composition)
+		- [12A.8.1 Stages of a Task](#12a81-stages-of-a-task)
+		- [12A.8.2 Formula Summary](#12a82-formula-summary)
+		- [12A.8.3 XS Tasks (≤ 2h)](#12a83-xs-tasks--2h)
+		- [12A.8.4 Transparency in Estimates](#12a84-transparency-in-estimates)
+		- [12A.8.5 Declined Implementation Scenarios](#12a85-declined-implementation-scenarios)
+		- [12A.8.6 Re-Estimation Impact](#12a86-re-estimation-impact)
+		- [12A.8.7 Portfolio View](#12a87-portfolio-view)
+		- [12A.8.8 Rationale for Overhead Percentages](#12a88-rationale-for-overhead-percentages)
+- [13. Tools & Environments](#13-tools--environments)
+- [14. Dependencies & Assumptions](#14-dependencies--assumptions)
+- [15. Risk Management (Draft)](#15-risk-management-draft)
+- [16. Termination & Suspension (Placeholder)](#16-termination--suspension-placeholder)
+- [17. Dispute Resolution (Placeholder)](#17-dispute-resolution-placeholder)
+- [18. Revision & Versioning](#18-revision--versioning)
+	- [Revision History](#revision-history)
+- [19. Glossary (Draft)](#19-glossary-draft)
+- [20. Appendix (Future)](#20-appendix-future)
+
+
 ## 1. Purpose
 Outline the standard framework governing commercial collaboration between Selleris and its clients, ensuring clarity on scope, responsibilities, deliverables, communication, ownership, and compliance.
 
@@ -537,6 +606,7 @@ TODO: Define preferred governing law / venue.
 | 0.11.0-draft | 2025-09-23 | Selleris Docs | Added defect severity scale, remediation targets, and quality tracking principles |
 | 0.12.0-draft | 2025-09-23 | Selleris Docs | Added detailed estimation workflow & cost composition (Section 12A.8) incl. 10% prep, 10% test, 20% PM overhead model and clarified billable preparation rule. |
 | 0.13.0-draft | 2025-09-23 | Selleris Docs | Added example task decomposition scenario (Section 12A.7). |
+| 0.14.0-draft | 2025-09-23 | Selleris Docs | Added navigable Table of Contents header menu for all sections. |
 
 ## 19. Glossary (Draft)
 | Term | Definition (Placeholder) |
