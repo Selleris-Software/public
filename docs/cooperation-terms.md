@@ -387,8 +387,50 @@ If an in-progress task requires material direction change, it is paused and spli
 
 ### 12A.7 Client Collaboration
 Clients are encouraged to challenge over-large tasks; early discussion reduces rework and preserves throughput.
+#### Example Decomposition: "Self-Service Password Reset" Feature
+Client User Story (raw): "As a user I want to reset my password via email so I can regain access without contacting support."  
+Initial Risk / Unknowns: Email deliverability (rate limits), token security, UX copy approval, auditing.
 
-TODO: Add example decomposition of a hypothetical large feature.
+High-Level (Undecomposed) Guess: "~24h" (too coarse — spans UI, backend, security, comms, observability). We decompose to create measurable, testable units:
+
+| Task # | Task Title | Description Focus | Size | Base Dev (E) h | Prep Incl? | Test 10% h | PM 20% h | Total Indicative h |
+|--------|------------|-------------------|------|----------------|-----------|-----------|----------|--------------------|
+| 1 | Task Project Preparation | Refine acceptance criteria, token expiry policy, email template placeholders, audit events list | XS | 2 (min) | — | — | — | 2.0 |
+| 2 | Password Reset Request Endpoint | POST /auth/password-reset: generate signed token, store hash, send event | S | 4 | Yes (in #1) | 0.4 | 0.8 | 5.2 |
+| 3 | Password Reset Token Validation & Completion Endpoint | Validate token (expiry + reuse), set new hash, invalidate token | S | 5 | No | 0.5 | 1.0 | 6.5 |
+| 4 | Email Template + Localization | Markdown/HTML template + EN copy, placeholder for future locales | XS | 2 (min) | No | — | — | 2.0 |
+| 5 | UI: Request Form + Success Screen | Simple form + success state (no auth) | S | 4 | No | 0.4 | 0.8 | 5.2 |
+| 6 | UI: Reset Form + Validation | New password + confirm + strength hints | S | 5 | No | 0.5 | 1.0 | 6.5 |
+| 7 | Security & Abuse Controls | Rate limiting, token TTL config, lockout on brute-force guess patterns | M | 8 | No | 0.8 | 1.6 | 10.4 |
+| 8 | Audit & Logging Events | Emit structured events (request issued, token used, password updated) | XS | 2 (min) | No | — | — | 2.0 |
+| 9 | Integration & Negative Tests | Cross-endpoint flow tests + invalid token, expired token, reused token | S | 4 | No | (Already partially covered) 0.4 | 0.8 | 5.2 |
+| 10 | Observability Dashboards | Basic metrics & alert (excessive resets/hour) | XS | 2 (min) | No | — | — | 2.0 |
+| 11 | Feature Flag Rollout | Wrap UI exposure + endpoints gating (progressive enable) | XS | 2 (min) | No | — | — | 2.0 |
+
+Notes:
+- Preparation effort captured once (Task #1) — not duplicated per task.
+- XS tasks use 2h minimum; overhead (test/PM) is considered embedded for XS classification.
+- For Tasks 2–7 & 9 (non-XS), Test 10% + PM 20% shown; minor rounding may occur.
+- Task #9 (Integration Tests) focuses dedicated testing beyond embedded task-level checks; its own overhead uses the standard percentages.
+- If during execution Task #7 expands (e.g., adding CAPTCHA), it may be split into a new S task to maintain granularity.
+
+Roll-Up (Indicative):
+- Base Dev Sum (E_total) = 4 + 5 + 2 + 4 + 5 + 8 + 2 + 4 + 2 + 2 = 38h (excluding prep XS tasks where E is already the minimum billing quantum; XS dev hours count toward E_total)
+- Preparation (separate, billed) = 2h (capped ≤10% of prospective large feature base estimate; 10% of 38h = 3.8h, so 2h is within cap)
+- Testing (approx 10% on non-XS tasks) ≈ 0.4 + 0.5 + 0.4 + 0.5 + 0.8 + 0.4 ≈ 3.0h
+- PM (approx 20% on non-XS tasks) ≈ 0.8 + 1.0 + 0.8 + 1.0 + 1.6 + 0.8 ≈ 6.8h
+- Total Indicative (rounded) ≈ 38 + 2 + 3.0 + 6.8 = 49.8h → 50h (planning number)
+
+Client Review Benefits:
+- Each task independently testable & shippable (vertical slices).
+- Parallelization possible (e.g., UI tasks vs security controls) to reduce lead time.
+- Clear visibility into which parts can be descoped if deadline pressure emerges (e.g., Observability dashboards could move to later sprint without jeopardizing core capability).
+
+Change Handling:
+- If UI strength hints require external API after start → create spike XS task; adjust impacted UI task size if needed.
+- If legal mandates extended audit fields mid-flight → split new S task rather than inflating existing ones silently.
+
+Outcome: The client can approve granular scope with transparent overhead rationale instead of a single opaque 24–50h block.
 
 ### 12A.8 Estimation Workflow & Cost Composition
 This subsection clarifies how Selleris structures task estimation and communicates cost components to maintain transparency.
@@ -494,6 +536,7 @@ TODO: Define preferred governing law / venue.
 | 0.10.0-draft | 2025-09-23 | Selleris Docs | Added minimal acceptance criteria template & GitHub Projects V2 reference |
 | 0.11.0-draft | 2025-09-23 | Selleris Docs | Added defect severity scale, remediation targets, and quality tracking principles |
 | 0.12.0-draft | 2025-09-23 | Selleris Docs | Added detailed estimation workflow & cost composition (Section 12A.8) incl. 10% prep, 10% test, 20% PM overhead model and clarified billable preparation rule. |
+| 0.13.0-draft | 2025-09-23 | Selleris Docs | Added example task decomposition scenario (Section 12A.7). |
 
 ## 19. Glossary (Draft)
 | Term | Definition (Placeholder) |
