@@ -28,6 +28,16 @@ Language: English (authoritative)
 	- [6.4 Test Coverage Expectations (Baseline)](#64-test-coverage-expectations-baseline)
 	- [6.5 Continuous Improvement](#65-continuous-improvement)
 - [7. Intellectual Property (IP)](#7-intellectual-property-ip)
+	- [7.1 Definitions](#71-definitions)
+	- [7.2 Ownership of Client-Funded Custom Deliverables](#72-ownership-of-client-funded-custom-deliverables)
+	- [7.3 Selleris Pre-Existing & Retained Materials](#73-selleris-pre-existing--retained-materials)
+	- [7.4 Managed Infrastructure & Platform Services (Non-Transfer)](#74-managed-infrastructure--platform-services-non-transfer)
+	- [7.5 Open-Source & Third-Party Components](#75-open-source--third-party-components)
+	- [7.6 License Grants (Assignment & License-Back)](#76-license-grants-assignment--license-back)
+	- [7.7 Residuals](#77-residuals)
+	- [7.8 Delivery & Access Mechanics](#78-delivery--access-mechanics)
+	- [7.9 Migration / Exit Assistance](#79-migration--exit-assistance)
+	- [7.10 Warranty & Disclaimer](#710-warranty--disclaimer)
 - [8. Confidentiality & Data Protection](#8-confidentiality--data-protection)
 - [9. Security & Compliance](#9-security--compliance)
 - [10. Change Management](#10-change-management)
@@ -259,20 +269,155 @@ Severity distribution and mean time to resolution (MTTR) for S1–S3 are reviewe
 
 
 ## 7. Intellectual Property (IP)
-Draft Principle: Custom deliverables funded by the client become the client's property upon full payment, excluding pre‑existing Selleris frameworks, tools, or accelerators (licensed for use).  
-TODO: Refine license boundary wording & include open-source component obligations.
+This Section allocates ownership and usage rights to balance (a) client certainty over custom business logic and deliverables, with (b) Selleris' need to retain & re‑use internal accelerators, platform capabilities, generic patterns, and know‑how. Code transfer does NOT imply any obligation for Selleris to continue providing hosting, infrastructure, SRE, or managed platform services (see 7.4); those services, when provided, are rendered under a separate hosting / platform agreement and are not governed here.
+
+### 7.1 Definitions
+- "Custom Deliverables" – Source code files, configuration manifests, schemas, scripts, technical design documents, migration procedures, and other discrete software or documentation assets created by Selleris specifically for the client under approved tasks / Stages and not constituting Pre‑Existing Materials.
+- "Pre‑Existing Materials" – Any tools, libraries, templates, internal frameworks, automation scripts, deployment pipelines, architectural patterns, knowledge bases, runbooks, or other materials owned, developed, or licensed by Selleris (or its licensors) prior to (or independent of) the specific client task, including generic modules refined while serving multiple clients.
+- "Composite Work" – A deliverable that intermixes Custom Deliverables with Pre‑Existing Materials.
+- "Third‑Party Components" – Open-source or commercially licensed software governed by separate public or vendor licenses.
+- "Residual Knowledge" – General ideas, concepts, methods, know‑how, expertise, and skills retained in the unaided memory of Selleris personnel after performing the services.
+
+### 7.2 Ownership of Client-Funded Custom Deliverables
+Subject to full payment of all undisputed fees relating to the task(s) producing them, Selleris assigns to the client all right, title, and interest in the Custom Deliverables (excluding Pre‑Existing Materials and Third‑Party Components embedded therein). Assignment is effective upon receipt of payment for the invoice covering the related effort. Until payment, Client holds a revocable, non-transferable right to use the Custom Deliverables solely for internal evaluation.
+
+### 7.3 Selleris Pre-Existing & Retained Materials
+All Pre‑Existing Materials remain the exclusive property of Selleris or its licensors. To the extent any Pre‑Existing Materials are incorporated into a Composite Work, Selleris grants the client a perpetual, worldwide, non-exclusive, non-transferable (except with the client’s business successor in an M&A transaction), royalty-free license to use, execute, reproduce and internally modify such embedded Pre‑Existing Materials solely as part of, and to the extent required to utilize, the associated Custom Deliverables. No rights are granted to disassemble generic modules for purposes unrelated to the delivered business functionality or to create derivative products that replicate Selleris’ generic accelerators for redistribution.
+
+### 7.4 Managed Infrastructure & Platform Services (Non-Transfer)
+Infrastructure, platform orchestration layers, shared multi-tenant operational tooling, observability stacks, secret management systems, CI/CD pipeline engines, deployment runners, container base images, and any managed runtime configurations that Selleris operates on its own (or third-party) hosting accounts are NOT part of the Custom Deliverables and are not transferred. Access to build or runtime environments while Selleris is the hosting provider is governed by a separate hosting / platform service arrangement. Upon termination or migration, Selleris will (on request) export application-level artifacts (source, build manifests, environment variable names without secret values, configuration templates) – see 7.9.
+
+### 7.5 Open-Source & Third-Party Components
+1. All Third‑Party Components are provided under their respective licenses; those licenses govern use, not this Agreement.  
+2. Selleris will avoid introducing components with materially restrictive terms (e.g., strong copyleft affecting proprietary aggregation) without advance client notification and written acknowledgment.  
+3. A Software Bill of Materials (SBOM) or dependency manifest (e.g., `package.json`, `requirements.txt`, lockfiles) serves as disclosure; additional structured SBOM export may be provided upon request.  
+4. Client agrees to comply with attribution, notice, and license retention obligations inherent in such Third‑Party Components.  
+5. Security or license compliance obligations beyond reasonable standard dependency hygiene (e.g., formal OSS license audits) require separate scoping.  
+
+### 7.6 License Grants (Assignment & License-Back)
+1. Assignment: As per 7.2, Selleris assigns ownership of Custom Deliverables upon full payment.  
+2. License-Back to Selleris: Client grants Selleris a perpetual, worldwide, royalty-free, non-exclusive license to internally use (but not publicly distribute as-is) generic patterns, abstractions, or snippets extracted from Custom Deliverables solely for: (a) improving internal tooling, (b) developing reusable accelerators, and (c) knowledge sharing across Selleris teams—provided such reuse does not disclose client Confidential Information or replicate proprietary business logic verbatim.  
+3. Analytics / Benchmarking: Selleris may compile and internally use aggregated, anonymized metrics (e.g., build durations, defect density) derived from work performed, excluding client-identifiable data.  
+
+### 7.7 Residuals
+Selleris and its personnel are free to use Residual Knowledge for any purpose, including serving other clients, so long as such use does not breach confidentiality or result in unauthorized disclosure of client proprietary source code, trade secrets, or non-public business strategies.
+
+### 7.8 Delivery & Access Mechanics
+1. Source Code Delivery: Unless otherwise agreed, source repositories (or mirrored forks) are pushed or granted read access in the client-controlled version control system upon (a) acceptance of the task or (b) periodic sync points for ongoing epics.  
+2. Interim Access: If development occurs initially in a Selleris-managed private repository for acceleration reasons, the full commit history (not squashed unless client requests) is provided at delivery checkpoint.  
+3. Tooling Scripts: Build scripts, migration scripts, and environment templates (sans secrets) are included within the repository or separate ops folder.  
+4. Secrets: Actual secret values (API keys, passwords, tokens) are never stored in code and are not “deliverables”; Selleris supplies the list of required secret names & types.  
+5. Binary Artifacts: Container images or compiled binaries built in Selleris infrastructure are reproducible by the client using provided Dockerfiles / build instructions unless a proprietary Selleris base image is involved; in that case a runtime-compatible public base alternative is documented if dependency prohibits redistribution.  
+
+### 7.9 Migration / Exit Assistance
+Upon written request within 30 days of termination or transition from Selleris-managed hosting to client-managed infrastructure, Selleris will provide: (a) final source snapshot confirmation, (b) documented environment variable map (names + purpose), (c) infrastructure topology diagram (logical) if previously created under an approved task, (d) data export guidance for application-owned databases (if within scope). Additional hands-on migration support is billable under prevailing T&M rates unless already included in a separately approved Stage.
+
+### 7.10 Warranty & Disclaimer
+1. Limited Warranty: For 30 calendar days following acceptance of a Custom Deliverable, Selleris will remediate (at no additional cost) reproducible defects where the implementation materially fails to meet the documented acceptance criteria (Section 5) existing at acceptance date, provided the code has not been modified by the client or third parties in the relevant area.  
+2. Exclusions: Issues caused by (a) changes to third-party services outside Selleris control, (b) misuse, (c) environments materially differing from those documented, or (d) unsupported modifications, are out of scope and billable as new tasks.  
+3. Disclaimer: EXCEPT FOR THE LIMITED WARRANTY ABOVE, CUSTOM DELIVERABLES AND ANY EMBEDDED PRE‑EXISTING MATERIALS ARE PROVIDED "AS IS" WITHOUT OTHER EXPRESS OR IMPLIED WARRANTIES (INCLUDING MERCHANTABILITY, FITNESS FOR PARTICULAR PURPOSE, NON-INFRINGEMENT).  
+4. Mitigation Priority: Warranty fixes are prioritized consistent with severity (Section 6) and do not expand acceptance criteria retroactively.  
+
+### 7.11 Precedence & Survival
+In the event of conflict between this Section and any future master agreement, the master agreement prevails. Sections 7.3–7.11 (rights retention, license-back, residuals, disclaimers) survive termination.
 
 ## 8. Confidentiality & Data Protection
-- Mutual confidentiality obligations (draft).  
-- Data Handling: Minimal retention principle.  
-- Personal Data: Processed only as required; DPA addendum if needed.  
-TODO: Add encryption & access control summary.  
+Selleris treats protection of client confidential information and any personal data as a foundational obligation. This Section summarizes the baseline operational safeguards in place. More stringent, client‑specific controls (if required) can be addressed through a Data Processing Addendum (DPA) or Security Addendum.
+
+### 8.1 Confidential Information
+Each party will (a) use the other party’s Confidential Information only for purposes of performing or receiving the services; (b) restrict disclosure to personnel (including vetted subcontractors, if any) with a strict need to know; (c) apply at least the same degree of care it uses to protect its own comparable confidential information (and not less than a commercially reasonable standard). Confidential Information excludes information that is or becomes public without breach, is independently developed, or rightfully obtained from a third party without duty of confidentiality.
+
+### 8.2 Data Minimization & Retention
+Selleris collects and stores only the minimum client data required to perform approved tasks. Non-essential production data copies are avoided; where test datasets are required, anonymized or masked samples are preferred. Unless mandated by law or active dispute, transient working data (temporary exports, debug snapshots) are purged within 30 days of resolution of the related task.
+
+### 8.3 Personal Data Handling
+If personal data (as defined by applicable data protection laws) is processed, it is limited to the scope necessary for the agreed functionality or debugging. A separate DPA (if executed) will prevail for specifics (data subject rights, international transfers, sub‑processors). In absence of a DPA, Selleris acts as a processor only for the minimal technical purposes inherent to providing development and support services.
+
+### 8.4 Access Control & Identity
+- Identity Stack: Microsoft 365 / Azure Active Directory (Entra ID) centralizes identity & conditional access.  
+- MFA: Mandatory multi-factor authentication enforced for all privileged and source control accounts.  
+- Least Privilege: Access is provisioned per-role and periodically reviewed (at least quarterly) with immediate revocation upon role change or termination.  
+- Segregation: Production credentials are isolated; developers operate primarily in non-production environments unless production access is explicitly approved for a task (e.g., incident mitigation).  
+
+### 8.5 Secret & Key Management
+All operational secrets (API keys, connection strings, certificates, signing keys) are stored in Azure Key Vault. Direct embedding of secrets in source code, commit history, or unencrypted configuration repositories is prohibited by internal policy and enforced through automated scanning (e.g., GitHub secret scanning and custom pre-commit hooks). Rotation of sensitive keys follows a risk-based schedule or is triggered immediately upon suspected exposure.
+
+### 8.6 Encryption
+- In Transit: All external and administrative access endpoints require TLS (minimum TLS 1.2; higher where platform supports).  
+- At Rest: Azure-managed disk, database, and object storage encryption (AES-256 or provider equivalent) is relied upon.  
+- Backups: Encrypted by the underlying Azure storage subsystem; logical backups containing sensitive data follow the same Key Vault–controlled access restrictions.
+
+### 8.7 Logging & Monitoring
+Operational and security-relevant events (authentication, privilege elevation, secret retrieval, deployment actions) are logged in Azure Monitor / Log Analytics and, where applicable, GitHub Enterprise audit logs. Alerting thresholds are configured for anomalous authentication patterns and failed secret retrieval attempts.
+
+### 8.8 Data Transfer & Isolation
+Source code and build artifacts are transferred only over encrypted channels (HTTPS / SSH). Where multi-tenant build infrastructure is used, logical isolation and ephemeral build agents minimize persistence of client artifacts beyond build completion.
+
+### 8.9 Confidential Materials Exclusions
+Selleris does not accept (and client must not provide) raw production payment card full PAN data, unmasked national IDs, or biometric templates unless a specific addendum with enhanced controls is executed in advance.
+
+### 8.10 Return / Destruction
+Upon written request or termination, and subject to Section 7 (IP), Selleris will either return or delete (at client election) remaining client Confidential Information not required for statutory retention—confirming completion in writing (deletion certificates or log references may be provided upon request). Aggregated non-identifying metrics and Residual Knowledge are retained per Sections 7.6–7.7.
 
 ## 9. Security & Compliance
-- Baseline Practices: Version control, MFA, least privilege.  
-- Vulnerability Handling: Report & patch workflow (TODO).  
-- Third‑Party Dependencies: SBOM transparency (draft).  
-TODO: Add certifications / attestations (if any).
+This Section summarizes Selleris' secure development and operational posture within the Microsoft 365 + Azure + GitHub Enterprise ecosystem. It is not a substitute for a formal audit report; however, it outlines disciplined baseline practices without expanding Selleris’ liability beyond express contractual terms.
+
+### 9.1 Platform & Ecosystem
+- Hosting & Runtime: Azure (regional selection per client task requirements).  
+- Identity & Access: Azure AD (Entra ID) with conditional access policies (device compliance / MFA).  
+- Source Control & CI/CD: GitHub Enterprise (branch protection, required reviews, Dependabot scanning, secret scanning).  
+- Secrets: Azure Key Vault (see 8.5).  
+- Productivity & Collaboration: Microsoft 365 (Exchange / Teams) with retention & conditional access policies.
+
+### 9.2 Secure Development Lifecycle (Lightweight)
+1. Planning: Security considerations captured in acceptance criteria when relevant (e.g., auth, PII handling).  
+2. Implementation: Code review mandatory (at least one qualified reviewer) for non-XS tasks; automated linters and security static analysis (GitHub Advanced Security if licensed) run on pull requests.  
+3. Testing: High-risk changes (auth flows, cryptographic handling, data migrations) require explicit negative-path tests.  
+4. Pre-Deployment: Dependency vulnerability scan & license check; critical / high severity issues (as defined by advisory sources) evaluated before merge.  
+5. Post-Deployment: Runtime monitoring & log anomaly review (Azure Monitor, Application Insights where used).  
+
+### 9.3 Vulnerability Handling Workflow
+| Stage | Action | Target (Business Hours) | Output |
+|-------|--------|-------------------------|--------|
+| Detection | Automated scanner / report or client notice | Immediate logging | Task created / tagged security | 
+| Triage | Severity & exploitability assessment | ≤ 1 business day | Severity classification (Section 6) |
+| Mitigation (S1/S2) | Workaround / containment | S1 ≤ 4h / S2 ≤ 1 bd | Interim mitigation note |
+| Fix Implementation | Code / config remediation | S1 ≤ 2 bd / S2 ≤ 5 bd / S3 next release | PR with reference |
+| Verification | Re-scan / manual confirm | ≤ 1 bd after merge | Verification comment |
+| Closure | Documentation & metrics update | Same day as verification | Closed task w/ evidence |
+
+Targets above are internal objectives (non-contractual unless a separate support SLA addendum states otherwise) and align with Section 6 remediation principles.
+
+### 9.4 Dependency & Patch Management
+- Automated dependency monitoring (Dependabot or Renovate equivalent).  
+- High severity advisories: review within 1 business day; if exploitable path confirmed, prioritized per S1/S2 mechanics.  
+- Routine upgrades: batched on a scheduled cadence (e.g., bi-weekly) to reduce drift.  
+- Deprecated / unsupported dependencies flagged for replacement tasks.
+
+### 9.5 Environment Hardening
+- Principle of Least Privilege: Scoped managed identities / service principals with minimal role assignments.  
+- Network Controls: Use of Azure security groups / firewall rules to restrict administrative surface; public exposure limited to required endpoints.  
+- Isolation: Separation of dev/test/stage/prod subscriptions or resource groups; no direct production database writes from developer local machines.  
+- Build Integrity: Signed container images where applicable; ephemeral build agents discard workspace after completion.
+
+### 9.6 Logging, Monitoring & Incident Readiness
+- Centralized Log Aggregation: Azure Monitor / Log Analytics + GitHub audit logs.  
+- Alerting: Threshold & anomaly alerts (authentication failures, unusual secret retrieval patterns).  
+- Incident Classification: Incidents mapped to defect severity (Section 6) for unified response.  
+- Post-Incident Review: Blameless summary capturing root cause, mitigation, and prevention tasks.  
+- Metrics: Mean Time to Mitigate (MTTM) and Mean Time to Resolve (MTTR) tracked for S1/S2 security issues.
+
+### 9.7 SBOM & Transparency
+Dependency manifests (and where supported, CycloneDX / SPDX outputs) can be provided upon request. Baseline SBOM generation occurs at major release checkpoints or monthly (whichever first) for active codebases under maintenance.
+
+### 9.8 Certifications & Framework Alignment
+At time of this draft, formal third-party certifications (e.g., ISO 27001, SOC 2) may not be held. Practices are guided by principles consistent with widely adopted frameworks (least privilege, MFA, change control, secure SDLC). Should formal attestation be achieved later, updated references will be inserted without altering ownership terms.
+
+### 9.9 Client Responsibilities
+Security is a shared responsibility. Client must: (a) avoid transmitting unnecessary sensitive data into tasks or logs; (b) provision timely approvals for mitigations requiring configuration changes; (c) manage its own identity lifecycle for any client-owned accounts; (d) notify Selleris promptly of suspected credential compromise related to shared systems. Delays in these responsibilities may extend resolution targets proportionally.
+
+### 9.10 Non-Expansion of Liability
+Nothing in Sections 8 or 9 creates warranties or indemnities beyond those expressly stated elsewhere. These sections describe operational posture for transparency and collaboration efficiency.
 
 ## 10. Change Management
 - Change Request (CR) Structure: ID, description, rationale, impact, cost/time delta.  
@@ -462,19 +607,19 @@ Initial Risk / Unknowns: Email deliverability (rate limits), token security, UX 
 
 High-Level (Undecomposed) Guess: "~24h" (too coarse — spans UI, backend, security, comms, observability). We decompose to create measurable, testable units:
 
-| Task # | Task Title | Description Focus | Size | Base Dev (E) h | Prep Incl? | Test 10% h | PM 20% h | Total Indicative h |
-|--------|------------|-------------------|------|----------------|-----------|-----------|----------|--------------------|
-| 1 | Task Project Preparation | Refine acceptance criteria, token expiry policy, email template placeholders, audit events list | XS | 2 (min) | — | — | — | 2.0 |
-| 2 | Password Reset Request Endpoint | POST /auth/password-reset: generate signed token, store hash, send event | S | 4 | Yes (in #1) | 0.4 | 0.8 | 5.2 |
-| 3 | Password Reset Token Validation & Completion Endpoint | Validate token (expiry + reuse), set new hash, invalidate token | S | 5 | No | 0.5 | 1.0 | 6.5 |
-| 4 | Email Template + Localization | Markdown/HTML template + EN copy, placeholder for future locales | XS | 2 (min) | No | — | — | 2.0 |
-| 5 | UI: Request Form + Success Screen | Simple form + success state (no auth) | S | 4 | No | 0.4 | 0.8 | 5.2 |
-| 6 | UI: Reset Form + Validation | New password + confirm + strength hints | S | 5 | No | 0.5 | 1.0 | 6.5 |
-| 7 | Security & Abuse Controls | Rate limiting, token TTL config, lockout on brute-force guess patterns | M | 8 | No | 0.8 | 1.6 | 10.4 |
-| 8 | Audit & Logging Events | Emit structured events (request issued, token used, password updated) | XS | 2 (min) | No | — | — | 2.0 |
-| 9 | Integration & Negative Tests | Cross-endpoint flow tests + invalid token, expired token, reused token | S | 4 | No | (Already partially covered) 0.4 | 0.8 | 5.2 |
-| 10 | Observability Dashboards | Basic metrics & alert (excessive resets/hour) | XS | 2 (min) | No | — | — | 2.0 |
-| 11 | Feature Flag Rollout | Wrap UI exposure + endpoints gating (progressive enable) | XS | 2 (min) | No | — | — | 2.0 |
+| Task # | Task Title | Description Focus | Size | Base Dev (E) h | Test 10% h | PM 20% h | Total Indicative h |
+|--------|------------|-------------------|------|----------------|-----------|----------|--------------------|
+| 1 | Task Project Preparation | Refine acceptance criteria, token expiry policy, email template placeholders, audit events list | XS | 2 (min) | — | — | 2.0 |
+| 2 | Password Reset Request Endpoint | POST /auth/password-reset: generate signed token, store hash, send event | S | 4 | 0.4 | 0.8 | 5.2 |
+| 3 | Password Reset Token Validation & Completion Endpoint | Validate token (expiry + reuse), set new hash, invalidate token | S | 5 | 0.5 | 1.0 | 6.5 |
+| 4 | Email Template + Localization | Markdown/HTML template + EN copy, placeholder for future locales | XS | 2 (min) | — | — | 2.0 |
+| 5 | UI: Request Form + Success Screen | Simple form + success state (no auth) | S | 4 | 0.4 | 0.8 | 5.2 |
+| 6 | UI: Reset Form + Validation | New password + confirm + strength hints | S | 5 | 0.5 | 1.0 | 6.5 |
+| 7 | Security & Abuse Controls | Rate limiting, token TTL config, lockout on brute-force guess patterns | M | 8 | 0.8 | 1.6 | 10.4 |
+| 8 | Audit & Logging Events | Emit structured events (request issued, token used, password updated) | XS | 2 (min) | — | — | 2.0 |
+| 9 | Integration & Negative Tests | Cross-endpoint flow tests + invalid token, expired token, reused token | S | 4 | (Already partially covered) 0.4 | 0.8 | 5.2 |
+| 10 | Observability Dashboards | Basic metrics & alert (excessive resets/hour) | XS | 2 (min) | — | — | 2.0 |
+| 11 | Feature Flag Rollout | Wrap UI exposure + endpoints gating (progressive enable) | XS | 2 (min) | — | — | 2.0 |
 
 Notes:
 - Preparation effort captured once (Task #1) — not duplicated per task.
@@ -598,6 +743,8 @@ TODO: Define preferred governing law / venue.
 | 0.3.0-draft | 2025-09-23 | Selleris Docs | Added business hours (Europe/Warsaw), SLA business-hours counting clarification, base & after-hours rates, pricing section expansion |
 | 0.4.0-draft | 2025-09-23 | Selleris Docs | Added minimum billing increment, auto-start rule, estimation & t-shirt sizing, decomposition best practices |
 | 0.5.0-draft | 2025-09-23 | Selleris Docs | Added payment models (T&M monthly, Project 50/50), mixed model rules, financial governance |
+| 0.5.1-draft | 2025-09-23 | Selleris Docs | Expanded Section 7 (IP) with ownership, license-back, infrastructure exclusion, OSS, residuals, warranty/disclaimer. |
+| 0.5.2-draft | 2025-09-23 | Selleris Docs | Expanded Sections 8 & 9 (Confidentiality, Data Protection, Security & Compliance) with Azure / M365 / GitHub Enterprise posture, vulnerability workflow, dependency & SBOM transparency. |
 | 0.6.0-draft | 2025-09-23 | Selleris Docs | Finalized Scope of Engagement section with only T&M and Project Stage models, added comparison table |
 | 0.7.0-draft | 2025-09-23 | Selleris Docs | Completed roles & responsibilities table with optional DevOps, Data, AI roles |
 | 0.8.0-draft | 2025-09-23 | Selleris Docs | Added T&M month-end rollover policy & governance for extended tasks |
@@ -607,6 +754,7 @@ TODO: Define preferred governing law / venue.
 | 0.12.0-draft | 2025-09-23 | Selleris Docs | Added detailed estimation workflow & cost composition (Section 12A.8) incl. 10% prep, 10% test, 20% PM overhead model and clarified billable preparation rule. |
 | 0.13.0-draft | 2025-09-23 | Selleris Docs | Added example task decomposition scenario (Section 12A.7). |
 | 0.14.0-draft | 2025-09-23 | Selleris Docs | Added navigable Table of Contents header menu for all sections. |
+| 0.14.1-draft | 2025-09-23 | Selleris Docs | Removed 'Prep Incl?' column from decomposition table for clarity. |
 
 ## 19. Glossary (Draft)
 | Term | Definition (Placeholder) |
