@@ -66,15 +66,23 @@ Both models enforce the principle of discrete, measurable output per task. No �
 No additional engagement forms (e.g., generic retainers or indefinite support subscriptions) are offered unless incorporated as structured Stages or pre-approved T&M task sequences.
 
 ## 3. Roles & Responsibilities
-| Role | Selleris Responsibilities (Draft) | Client Responsibilities (Draft) |
-|------|-----------------------------------|---------------------------------|
-| Product Owner | TODO | TODO |
-| Technical Lead | TODO | TODO |
-| Delivery Manager | TODO | TODO |
-| Security / Compliance | TODO | TODO |
-| Support / Success | TODO | TODO |
+The following roles describe functional responsibilities only. Individual names and direct contact details are intentionally excluded in this public document. Some roles may be consolidated depending on engagement scale.
 
-TODO: Add escalation contacts / response time placeholders.
+| Role | Primary Focus / Purpose | Selleris Core Responsibilities | Client Collaboration Touchpoints |
+|------|-------------------------|--------------------------------|----------------------------------|
+| Product Owner (Selleris) | Value alignment & backlog clarity | Refine requirements into discrete tasks; define acceptance criteria; prioritize based on client value & risk; validate delivered increments | Receives business context, negotiates priorities, confirms acceptance readiness |
+| Technical Lead | Technical direction & solution integrity | Architecture decisions; code review standards; risk & feasibility assessment; technical debt management; mentoring | Aligns on technical constraints, reviews integration assumptions |
+| Delivery Manager | Flow, predictability & coordination | Sprint / iteration orchestration; SLA monitoring; impediment escalation; reporting of progress & risks | Shares roadmap inputs; provides timely approvals / feedback |
+| Security / Compliance | Secure development & basic compliance posture | Security review of changes (as scope requires); dependency & vulnerability scanning; guidance on secure configurations; incident triage coordination | Provides required policies, raises security concerns, supplies compliance constraints |
+| Support / Success | Post‑delivery continuity & incident responsiveness | Initial triage of incoming tasks; classification & prioritization checks; communication during Critical incidents; organizing knowledge transfer | Supplies reproduction details; validates fixes; provides impact statements |
+| DevOps / Platform | Environment reliability & delivery automation | CI/CD pipeline configuration; infrastructure as code (if in scope); observability enablement; performance baseline monitoring; release facilitation | Provides access credentials, environment policies, cost constraints |
+| Data Engineer / Analyst (Optional) | Data pipeline & insight enablement | Data model alignment; transformation scripts; data quality checks; basic analytics extracts / dashboards (if in scope) | Supplies source data clarity; confirms metric definitions |
+| AI Engineer (Optional) | ML/AI feature integration & lifecycle | Model integration & evaluation harnesses; prompt / inference pipeline optimization; reproducibility & versioning of model artifacts (if ML/AI scope exists) | Defines business success metrics (precision/recall, latency); provides domain feedback on model outputs |
+
+Notes:
+- Optional roles are engaged only when the task portfolio justifies their involvement.
+- A single individual may fulfill multiple roles in small-scale engagements.
+- Escalation Path (draft – to be finalized in Section 11 when escalation matrix is added): Support / Success → Delivery Manager → Technical Lead / Security (depending on nature) → Executive Sponsor (if required).
 
 ## 4. Communication & Cadence
 - Authoritative Task Channel: All work, questions, change requests, incident reports, and clarifications MUST be created as tasks in the Selleris client portal `my.selleris.com`. This is the single system of record and the sole trigger for SLA timers.
@@ -96,13 +104,90 @@ Holiday Calendar: Polish national public holidays are treated as non-business da
 3. Implementation: Iterative delivery, code review, QA.  
 4. Acceptance: Criteria confirmation, UAT support.  
 5. Transition: Handover, documentation, knowledge transfer.  
-TODO: Add acceptance criteria template & definition of done matrix.
+
+All tasks are managed in GitHub Projects (Projects V2) under an Enterprise license providing granular permission scopes, audit logging, branch protection, and security scanning (Dependabot / code scanning) for traceable, secure lifecycle management.
+
+### 5.1 Minimal Acceptance Criteria Template (Standard)
+To keep collaboration lightweight while preserving clarity, each task MUST contain the following minimal structured elements (Variant A – Mandatory Core):
+
+1. Business Outcome: One concise sentence describing the value or change ("Enable X so that Y").  
+2. Scope Includes: Bullet list of what is being delivered (functional slice, component, endpoint, UI element).  
+3. Out of Scope: Explicit bullets of what is NOT included (prevents assumption creep).  
+4. Functional Criteria: List OR simple Given/When/Then statements (at least one); describes observable behavior.  
+5. Non-Functional (If Relevant): Only if there is a meaningful performance, security, or UX nuance; otherwise omit.  
+6. Acceptance Evidence Required: What the client will review (e.g., PR link, screenshot, test output, curl example).  
+7. Data / Migration Impact: "N/A" or note of schema change, migration script, seeded data, backward compatibility note.
+
+Optional Enhancements (used only when warranted by complexity): rollback plan, risk note, edge case enumeration.
+
+### 5.2 Example (Illustrative)
+Business Outcome: Allow managers to export quarterly sales summary to CSV for finance reconciliation.
+
+Scope Includes:
+- New backend endpoint: GET /reports/sales/quarterly?year=YYYY&quarter=Q
+- CSV generation (UTF-8, semicolon delimiter)
+- Basic access control (role: manager)
+
+Out of Scope:
+- UI dashboard redesign
+- XLSX export
+- Historical data backfill corrections
+
+Functional Criteria:
+- Given a user with role manager, When they request an existing quarter, Then a CSV file is returned (HTTP 200) containing aggregated totals per region.
+- Given a user without manager role, When they request the same endpoint, Then HTTP 403 is returned.
+
+Non-Functional (If Relevant): Response time ≤ 2s for datasets ≤ 50k rows.
+
+Acceptance Evidence Required: PR #, automated test report (endpoint tests), sample CSV attached to task.
+
+Data / Migration Impact: N/A (derives from existing sales table; no schema change).
+
+### 5.3 Usage Notes
+- If any mandatory element is missing at implementation start, the task may be paused for clarification.
+- For XS tasks: Scope Includes may be a single bullet; Non-Functional can be omitted entirely if irrelevant.
+- Avoid embedding large discussions in criteria; keep them in comment thread—criteria reflect final agreed snapshot.
+- Functional Criteria should focus on externally verifiable outcomes rather than internal implementation details.
+
+### 5.4 Definition of Done (Preview)
+The formal Definition of Done matrix will follow (separate subsection) and ties directly to ensuring every Acceptance Criterion is satisfiable, testable, and evidenced. (Will be expanded in a subsequent revision.)
 
 ## 6. Quality & Testing
 - Code Standards: Internal engineering guidelines (public summary TBD).  
 - Testing Levels: Unit, integration, security scanning, performance (on demand).  
-- Defect Severity Levels: TODO (table pending).  
-- Remediation Targets: TODO.  
+- Defect Severity Levels & Remediation Targets defined below.  
+
+### 6.1 Defect Severity Classification
+Security findings are mapped directly onto this same severity scale (Option B-1). A security vulnerability that could realistically escalate impact is reclassified upward at Selleris' discretion after client notification.
+
+| Severity | Label | Definition (Impact) | Typical Examples | Workaround Target | Fix / Resolution Target | Notes |
+|----------|-------|---------------------|------------------|-------------------|-------------------------|-------|
+| S1 | Critical | Production outage, data loss/corruption risk, active security exploit, contractual milestone blocked, no reasonable workaround. | Service down, data integrity failure, privilege escalation vuln, release pipeline blocked for imminent launch. | ≤ 4 hours (stabilize or mitigate) | ≤ 2 business days (or interim mitigation + agreed plan) | Continuous focused effort until stabilized. After-hours engagement may apply. |
+| S2 | High | Major functionality broken or severely degraded; costly/risky workaround; security weakness with elevated risk but no active exploit; impacts key user cohort. | Core feature fails for subset, payment flow partial failure, high-severity library vuln w/ no immediate exploit known. | N/A (aim to reduce urgency quickly) | ≤ 5 business days (business hours) | Escalated if risk of becoming S1. |
+| S3 | Medium | Partial impairment; acceptable workaround exists; limited user or functional scope; moderate business impact. | Non-critical API returning incorrect secondary field; UI action requires manual retry; moderate performance degradation. | Handled in planned sprint cadence | Next planned release / sprint (typically ≤ 15 business days) | Can be bundled with related fixes. |
+| S4 | Low | Minor defect, cosmetic in nature, negligible business impact; does not impede workflows. | Alignment glitch, minor log noise, typo not causing ambiguity. | Not required | Scheduled per prioritization / grouping | May be upgraded if pattern emerges. |
+| S5 | Trivial | Purely cosmetic or editorial; no functional impact; polish-only. | Spacing, micro-copy punctuation, color shade mismatch. | Not required | Opportunistic (no guaranteed window) | Can close as "Won't Fix" if superseded by redesign. |
+
+### 6.2 Remediation Principles
+- Numeric windows are targets, not guaranteed contractual SLAs unless explicitly added to a support addendum.
+- For S1: If full fix cannot meet target, documented mitigation (feature flag isolation, traffic reroute, temporary patch) must be in place while final remedy is scheduled.
+- Security: Any S2 security issue demonstrating exploit feasibility or active scanning trend may be escalated to S1.
+- Reclassification: Severity may change upon new evidence (impact expansion / mitigation discovery). Changes are logged in task history.
+- Evidence of Fix: Must include reference to merged PR, test evidence, and if security-related, a short verification note (e.g. scanner output snippet or manual test).
+
+### 6.3 Tracking & Reporting
+- All S1/S2 issues highlighted in weekly (or ad hoc) status summaries until closure.
+- Aging S3 (> 2 sprints) triggers review for reprioritization or explicit deprioritize rationale.
+- S4/S5 may be grouped into periodic quality batches.
+
+### 6.4 Test Coverage Expectations (Baseline)
+- New critical logic (auth, finance-like flows, data transforms): unit + integration test coverage with negative path.
+- Public / external API changes: contract test updated; backward compatibility stated.
+- Security Fix PRs: regression test or rule (lint/policy) to prevent recurrence where feasible.
+
+### 6.5 Continuous Improvement
+Severity distribution and mean time to resolution (MTTR) for S1–S3 are reviewed quarterly to identify systemic issues (e.g., recurring root cause categories).
+
 
 ## 7. Intellectual Property (IP)
 Draft Principle: Custom deliverables funded by the client become the client's property upon full payment, excluding pre‑existing Selleris frameworks, tools, or accelerators (licensed for use).  
@@ -181,6 +266,7 @@ TODO: Add business hours & holiday calendar reference once finalized.
 - Approval Required: Tasks estimated > 2 hours require explicit written client approval (task comment stating approval) prior to commencement.
 - Overrun Safeguard: If during execution of an XS task it becomes clear that total effort will exceed 2 hours, Selleris pauses at (or as near as practicable to) the 2-hour mark and posts a revised estimate for approval before proceeding.
 - Bundling Prohibition: Related but separable XS tasks must not be aggregated artificially to bypass approval processes.
+- Task Project Preparation (Pre-Approval Work): For tasks > 2 hours, an initial "Task Project Draft" may be prepared (see Section 12A.8) to refine scope, acceptance criteria, dependencies, and high-level technical approach. This preparatory effort is capped by default at 10% of the proposed base implementation effort and is billable even if the client declines the full implementation estimate (because a discrete analysis & scoping artifact is delivered). If the client wishes NOT to authorize this preparatory analysis for a specific task, that intent must be stated explicitly before work begins.
 
 ### 12.2 Estimation Transparency
 - Estimate Format: Each task includes (a) T‑shirt size, (b) indicative hour range (if > XS), (c) key assumptions, and (d) risk factors if material.
@@ -304,6 +390,61 @@ Clients are encouraged to challenge over-large tasks; early discussion reduces r
 
 TODO: Add example decomposition of a hypothetical large feature.
 
+### 12A.8 Estimation Workflow & Cost Composition
+This subsection clarifies how Selleris structures task estimation and communicates cost components to maintain transparency.
+
+#### 12A.8.1 Stages of a Task
+1. Task Project Preparation (Scoping Draft)
+	- Input: Client user story / raw requirement.
+	- Output: Refined task using minimal acceptance criteria (Section 5.1), clarified assumptions, preliminary sizing.
+	- Effort Basis: Up to 10% of base implementation estimate ("Base Dev Effort" E). Billed regardless of later implementation approval because it produces a discrete, reviewable artifact (scope spec / refined acceptance criteria / risk notes).  
+2. Implementation
+	- Core engineering & code creation aligned to acceptance criteria.
+	- Effort Estimate: Base Dev Effort (E) hours.
+3. Testing
+	- Additional structured test design & execution beyond what is naturally embedded in implementation (e.g. explicit integration scenarios, negative paths, regression verification).  
+	- Standard Allocation: 10% of E (T = 0.10E). Adjusted upward only if explicitly stated (e.g. complex data migrations, multi-environment matrix).  
+4. Project Management (Lifecycle Oversight)
+	- Planning, coordination, stakeholder updates, progress reporting, task state hygiene in GitHub Projects, scheduling of code reviews, risk tracking.
+	- Standard Allocation: 20% of E (PM = 0.20E).  
+
+#### 12A.8.2 Formula Summary
+Base Dev Effort (E)  
+Preparation (Prep) = 0.10E  
+Testing (Test) = 0.10E  
+Project Management (PM) = 0.20E  
+Total Indicative Effort = E + 0.10E + 0.10E + 0.20E = 1.40E
+
+Example: If E = 10h → Total = 14h (Prep 1h, Implementation 10h, Testing 1h, PM 2h).  
+
+#### 12A.8.3 XS Tasks (≤ 2h)
+- The 2-hour minimum billing quantum already encompasses preparation, implementation, testing, and PM overhead for genuinely small changes.
+- If overhead alone would exceed the minimum (rare edge case), the task should be reclassified and re-estimated as S.
+
+#### 12A.8.4 Transparency in Estimates
+Estimates for tasks larger than XS include a breakdown line showing:  
+"Base Dev: E h | Prep 10%: 0.10E | Test 10%: 0.10E | PM 20%: 0.20E | Total: 1.40E h".
+
+If any component deviates from defaults (e.g. Testing 25% due to complex data validation), the deviation and reason must be explicitly noted.
+
+#### 12A.8.5 Declined Implementation Scenarios
+If the client declines to proceed with implementation after the Task Project Preparation stage:
+- Only the Preparation component (actual time, capped at 10% of proposed E) is billed.
+- The scoping artifact remains accessible to the client and may be reused in a future task or Stage.
+
+#### 12A.8.6 Re-Estimation Impact
+When task scope changes enough to trigger re-estimation (Section 12A.5), percentage components are recalculated against the new Base Dev Effort. Previously incurred preparation remains billed; no retroactive adjustment is made.
+
+#### 12A.8.7 Portfolio View
+Over time, Selleris may publish aggregate metrics (e.g. average actual vs estimated prep %, test %, PM %) to improve forecasting accuracy. Clients can request these metrics during quarterly reviews.
+
+#### 12A.8.8 Rationale for Overhead Percentages
+- Preparation 10%: Ensures sufficient discovery to avoid rework while keeping friction low.
+- Testing 10%: Baseline reinforcement of quality; incentivizes thin vertical slicing which naturally limits test surface area.
+- PM 20%: Covers coordination overhead for asynchronous communication, status curation, backlog hygiene, and risk surfacing—especially important in multi-task concurrent flows.
+
+Percentages are baselines, not hard caps in abnormal complexity contexts (e.g. regulated environments); any variance requires explicit pre-approval.
+
 ## 13. Tools & Environments
 - Source Control: Git-based (platform TBD if externally visible).  
 - Tracking: Issue/project management platform (TBD).  
@@ -346,8 +487,13 @@ TODO: Define preferred governing law / venue.
 | 0.3.0-draft | 2025-09-23 | Selleris Docs | Added business hours (Europe/Warsaw), SLA business-hours counting clarification, base & after-hours rates, pricing section expansion |
 | 0.4.0-draft | 2025-09-23 | Selleris Docs | Added minimum billing increment, auto-start rule, estimation & t-shirt sizing, decomposition best practices |
 | 0.5.0-draft | 2025-09-23 | Selleris Docs | Added payment models (T&M monthly, Project 50/50), mixed model rules, financial governance |
-| 0.6.0-draft | 2025-09-23 | Selleris Docs | Added T&M month-end rollover policy & governance for extended tasks |
-| 0.7.0-draft | 2025-09-23 | Selleris Docs | Finalized mission alignment statement |
+| 0.6.0-draft | 2025-09-23 | Selleris Docs | Finalized Scope of Engagement section with only T&M and Project Stage models, added comparison table |
+| 0.7.0-draft | 2025-09-23 | Selleris Docs | Completed roles & responsibilities table with optional DevOps, Data, AI roles |
+| 0.8.0-draft | 2025-09-23 | Selleris Docs | Added T&M month-end rollover policy & governance for extended tasks |
+| 0.9.0-draft | 2025-09-23 | Selleris Docs | Finalized mission alignment statement |
+| 0.10.0-draft | 2025-09-23 | Selleris Docs | Added minimal acceptance criteria template & GitHub Projects V2 reference |
+| 0.11.0-draft | 2025-09-23 | Selleris Docs | Added defect severity scale, remediation targets, and quality tracking principles |
+| 0.12.0-draft | 2025-09-23 | Selleris Docs | Added detailed estimation workflow & cost composition (Section 12A.8) incl. 10% prep, 10% test, 20% PM overhead model and clarified billable preparation rule. |
 
 ## 19. Glossary (Draft)
 | Term | Definition (Placeholder) |
