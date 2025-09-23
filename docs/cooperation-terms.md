@@ -41,9 +41,10 @@ TODO: Add escalation contacts / response time placeholders.
 	- Monthly steering / roadmap review (for engagements > 2 months).
 - Change Requests: Always logged as a task with type "Change"; impact (cost/time) assessment posted in task before client approval.
 - SLA Clock Mechanics: The first‑response SLA timer starts at the timestamp of task creation. It is reset (restarted) upon each new client comment that requires Selleris input. Internal Selleris comments do not reset SLA timers.
-- Working Hours Placeholder: Business hours / regional coverage to be defined (see Section 11 notes).
+- Business Hours (Authoritative): 09:00–18:00 Monday–Friday, Europe/Warsaw timezone (CET/CEST). Tasks created outside Business Hours are timestamped, but SLA hour counting begins at the next Business Hour boundary unless the task is legitimately Critical and notified through the Emergency Channel.
+- After-Hours Engagement: Work performed outside Business Hours, on weekends, or on Poland public holidays is billable at double the Base Hourly Rate (see Section 12) unless otherwise contractually agreed. Initiation of after-hours work (except for qualifying Critical incidents) requires explicit written confirmation in the task or the Emergency Channel followed by task documentation.
 
-TODO: Add finalized business hours & holiday calendar reference.
+Holiday Calendar: Polish national public holidays are treated as non-business days unless a separate support addendum states otherwise.
 
 ## 5. Delivery Process
 1. Initiation: Requirements intake & risk pre‑assessment.  
@@ -97,18 +98,19 @@ The first response is a substantive acknowledgment (not an automated receipt) in
 
 | Priority | First Response SLA (Business Hours) | Notes |
 |----------|-------------------------------------|-------|
-| Critical | 2 hours | Continuous engagement until workaround or stabilization. Outside standard coverage may require enhanced support addendum. |
+| Critical | 2 hours | Continuous engagement until workaround or stabilization. After-hours requires emergency notification; billed at double rate if outside Business Hours. |
 | High | 4 business hours | Same business day acknowledgment. |
 | Normal | 8 business hours (1 business day) | May be earlier depending on load. |
 | Low | 16 business hours (2 business days) | Batched during backlog review cycles. |
 
-SLA Timing Rules:
-- Start: Timestamp of task creation in `my.selleris.com`.
-- Reset: Each new client comment that requires a Selleris answer restarts the response SLA for that task (previous SLA cycle closes upon Selleris answer or expiration).
-- Suspension: Waiting on client data / access / clarification stops the SLA timer after Selleris has requested the needed input and labeled the task (label taxonomy TBD).
-- Aggregation: Multiple issues combined into one Critical ticket may be split and reprioritized.
+SLA Timing Rules (Business Hours Based):
+- Start: Timestamp of task creation in `my.selleris.com`; counting of SLA hours occurs only during defined Business Hours (09:00–18:00 Europe/Warsaw Mon–Fri). Example: A High priority task opened Friday 17:30 with a 4-hour SLA has 0.5 hours counted Friday, remaining 3.5 hours resume Monday 09:00.
+- Reset: Each new client comment that requires a Selleris answer restarts the response SLA for that task (previous SLA cycle closes upon Selleris answer or expiration). The restart follows the same Business Hours counting rule.
+- Suspension: Waiting on client data / access / clarification stops the SLA timer after Selleris has requested the needed input and labeled the task (label taxonomy TBD). Time between the suspension start and client-provided information is excluded from SLA calculation.
+- Aggregation: Multiple issues combined into one Critical ticket may be separated and reprioritized to reflect true impact.
+- Misprioritization: Reclassified tasks inherit a fresh SLA window from the reclassification timestamp.
 
-Business Hours Placeholder: Standard coverage window & regional holidays will be specified (still TBD). Until defined, times are interpreted relative to the primary contracted service region.
+Business Hours Definition: Business Hours exclude weekends and Poland public holidays. Activity outside this window is classified as After-Hours for billing unless covered by a specific extended support agreement.
 
 ### 11.3 Future Additions (Placeholders)
 - Resolution SLAs (dependent on agreed support tier) – TODO.
@@ -119,12 +121,82 @@ Misuse & Reclassification: Selleris will communicate the rationale when downgrad
 
 TODO: Add business hours & holiday calendar reference once finalized.
 
-## 12. Pricing & Invoicing (Placeholder)
+## 12. Pricing & Invoicing (Draft)
+- Base Hourly Rate: EUR 60 per hour ("Base Hourly Rate") unless otherwise specified in a separately executed contract or addendum.
+- After-Hours / Overtime Rate: 2× Base Hourly Rate (EUR 120/hour) for: (a) any work performed outside Business Hours (Section 4), (b) weekends, and (c) Poland public holidays, except where the parties have agreed to an alternative support retainer or fixed extended coverage.
 - Billing Models: Time & Materials (hourly / daily), Fixed Scope milestones, Retainer packages.  
-- Invoicing Frequency: TODO.  
-- Payment Terms: TODO (e.g., Net 15 / Net 30).  
-- Expenses: Pre‑approved only (draft).  
-TODO: Add late payment handling & currency policy.
+- Invoicing Frequency: TODO (e.g., monthly in arrears for T&M; milestone-based for Fixed Scope).  
+- Payment Terms: TODO (e.g., Net 15 / Net 30) from invoice date.  
+- Expenses: Pre‑approved only; pass-through at cost with receipts (draft).  
+- Currency: EUR is default; alternative currency requires prior written agreement (FX risk allocation TBD).  
+- Rate Changes: Selleris may adjust standard rates with 30 days written notice; locked rates in active SOWs remain until SOW completion or renewal.
+- Minimum Billing Increment (Authoritative): 2 hours. Any task estimated at or below 2 hours is billed as 2 hours (XS size) and may be started without additional client approval.
+
+### 12.1 Task Acceptance & Authorization Rules
+- Auto-Start Threshold: Tasks estimated ≤ 2 hours (XS) are auto-approved and enter execution queue without separate confirmation.
+- Approval Required: Tasks estimated > 2 hours require explicit written client approval (task comment stating approval) prior to commencement.
+- Overrun Safeguard: If during execution of an XS task it becomes clear that total effort will exceed 2 hours, Selleris pauses at (or as near as practicable to) the 2-hour mark and posts a revised estimate for approval before proceeding.
+- Bundling Prohibition: Related but separable XS tasks must not be aggregated artificially to bypass approval processes.
+
+### 12.2 Estimation Transparency
+- Estimate Format: Each task includes (a) T‑shirt size, (b) indicative hour range (if > XS), (c) key assumptions, and (d) risk factors if material.
+- Assumption Drift: Material invalid assumptions trigger re-estimation and renewed approval.
+
+### 12.3 Minimum Billing Increment Rationale
+The 2-hour minimum covers: context switching, environment preparation, coordination, code review overhead, and documentation updates even for small changes.
+
+Overtime Authorization: Non-Critical after-hours work requires explicit written authorization in the relevant task prior to commencement; absence of objection to an informational notice does not constitute approval.
+
+Late Payment Handling (Placeholder): Interest, suspension triggers, and reactivation fees to be defined.
+
+TODO: Finalize invoicing schedule, payment term, late fee policy, tax treatment (e.g., VAT applicability).
+
+## 12A. Estimation & Work Decomposition (Draft)
+
+### 12A.1 T‑Shirt Size Mapping (Indicative)
+| Size | Effort Band (Engineering Hours) | Billing Treatment | Typical Use | Decomposition Guidance |
+|------|---------------------------------|-------------------|-------------|------------------------|
+| XS | 2h fixed (minimum billable) | Auto-approved, billed as 2h | Minor bug fix, small config, copy tweak, simple query/report | Combine only if logically atomic outcome; else keep separate |
+| S | >2h – 8h (up to 1 business day) | Requires approval | Small feature, endpoint, structured refactor, test suite addition | Ensure clear acceptance criteria; avoid scope creep |
+| M | >8h – 24h (1–3 days) | Requires approval | Multi-endpoint feature, moderate redesign, integration adapter | Consider slicing by vertical user outcome or integration boundary |
+| L | >24h – 40h (3–5 days) | Requires approval | Larger feature set, coordinated refactor + tests | Must fit comfortably inside a single sprint with risk buffer |
+| XL | >40h – 64h (5–8 days) | Strongly scrutinized | Epic-sized change nearing sprint span | Mandatory review: try to split into independently deliverable increments |
+| XXL | >64h (>8 days) | Not allowed as a single task | Program / multi-epic | Decompose into epics → tasks (≤ L each) |
+
+Notes:
+- Effort bands are net engineering effort; review & QA time is included in the estimate.
+- A single task should not exceed ~30% of an individual contributor's two-week sprint capacity to preserve flow and enable parallelism.
+- XL tasks require an explicit decomposition attempt log (short justification why further split degrades value). XXL must be decomposed—no exceptions.
+
+### 12A.2 Sprint Fit Rule
+All tasks must fit inside a standard two-week sprint (10 business days). If not feasible, they are decomposed until each resulting task: (a) provides a testable slice of value, (b) has discrete acceptance criteria, (c) does not create hidden coupling with sibling tasks.
+
+### 12A.3 Recommended Decomposition Strategies
+1. Vertical Slicing: Deliver an end-to-end thin functional path (UI → API → persistence) instead of layered horizontal cuts.
+2. Risk-First: Isolate the highest technical or integration risk component early to fail fast.
+3. Interface Stubs: Create stable interfaces / contracts first; subsequent tasks implement internal logic.
+4. Feature Flags: Split enablement (flag scaffolding) from full activation to allow partial, safe merges.
+5. Data Migration Separation: Migration scripts / data backfill tracked as distinct tasks from feature logic.
+6. Observability as Separate Task: Metrics / logging enhancements can be split if they would block feature delivery.
+
+### 12A.4 Estimation Quality Practices
+- Use historical velocity and actuals to calibrate future ranges.
+- Record actual effort for M and above to enable continuous improvement.
+- Flag High Uncertainty (HU) when assumptions exceed an agreed threshold (e.g., unknown third-party API); plan a spike (time-boxed XS/S) before committing to full estimate.
+
+### 12A.5 Re-Estimation Triggers
+- Scope increase or acceptance criteria expansion.
+- Architectural pivots or dependency changes.
+- External integration instability discovered mid-task.
+- Performance or security hardening beyond originally assumed baseline.
+
+### 12A.6 Out-of-Band Changes
+If an in-progress task requires material direction change, it is paused and split: original task closed with delivered subset; new tasks capture remaining or altered scope to protect traceability.
+
+### 12A.7 Client Collaboration
+Clients are encouraged to challenge over-large tasks; early discussion reduces rework and preserves throughput.
+
+TODO: Add example decomposition of a hypothetical large feature.
 
 ## 13. Tools & Environments
 - Source Control: Git-based (platform TBD if externally visible).  
@@ -165,6 +237,9 @@ TODO: Define preferred governing law / venue.
 |---------|------|--------|---------|
 | 0.1.0-draft | 2025-09-23 | Selleris Docs | Initial structural skeleton |
 | 0.2.0-draft | 2025-09-23 | Selleris Docs | Added applicability, acceptance mechanics, communication channels, SLA first response rules & priority definitions |
+| 0.3.0-draft | 2025-09-23 | Selleris Docs | Added business hours (Europe/Warsaw), SLA business-hours counting clarification, base & after-hours rates, pricing section expansion |
+| 0.4.0-draft | 2025-09-23 | Selleris Docs | Added minimum billing increment, auto-start rule, estimation & t-shirt sizing, decomposition best practices |
+| 0.3.0-draft | 2025-09-23 | Selleris Docs | Added business hours (Europe/Warsaw), SLA business-hours counting clarification, base & after-hours rates, pricing section expansion |
 
 ## 19. Glossary (Draft)
 | Term | Definition (Placeholder) |
