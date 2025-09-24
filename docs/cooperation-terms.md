@@ -519,9 +519,9 @@ Clients may freely choose either (or both concurrently) of the following payment
 #### 12.4.4 Example Classification Labels
 | Label | Meaning |
 |-------|---------|
-| model:tm | Standard monthly T&M task |
-| model:project | Task belongs to an approved Stage / milestone |
-| stage:<identifier> | Groups tasks under a specific Stage (e.g., stage:alpha-launch) |
+| T&M | Standard monthly T&M task |
+| Project (not empty) | Task belongs to an approved Stage / milestone |
+| Milestone | Groups tasks under a specific Stage (e.g., stage:alpha-launch) |
 
 #### 12.4.5 Model Selection Guidance
 - Choose T&M for exploratory, iterative backlog growth, support, maintenance.
