@@ -1,10 +1,14 @@
-# Selleris – Cooperation Terms (Skeleton / Draft)
+# Selleris – Cooperation Terms
 
-Status: Draft (Placeholders)  
 Intended Audience: Prospective and current clients  
 Language: English (authoritative)  
 
-> NOTE: This is an initial structural draft. Sections marked with TODO will be completed after internal alignment. Do not treat this as the final contractual baseline.
+Legal Entity (Supplier): Selleris spółka z ograniczoną odpowiedzialnością (Selleris sp. z o.o.)  
+Registered Address: ul. Artyleryjska 35/2, 03-276 Warsaw, Poland  
+KRS: 0000690620  |  REGON: 368051966  |  NIP (VAT ID): 7010709991  
+All rates are exclusive of VAT. Where applicable, VAT will be added pursuant to Polish and EU tax regulations (reverse charge applies to eligible intra‑EU B2B customers outside Poland with a valid VAT ID). Client is responsible for any withholding taxes; gross‑up not included unless mandated by law.
+
+These Cooperation Terms form the operational baseline and supersede prior informal process descriptions. Earlier references to “draft”, “placeholder”, or “TBD” in previous iterations are no longer applicable.
 
 ## Table of Contents
 - [1. Purpose](#1-purpose)
@@ -18,13 +22,13 @@ Language: English (authoritative)
 - [9. Security & Compliance](#9-security--compliance)
 - [10. Change Management](#10-change-management)
 - [11. Service Levels](#11-service-levels)
-- [12. Pricing & Invoicing (Draft)](#12-pricing--invoicing-draft)
-- [12A. Estimation & Work Decomposition (Draft)](#12a-estimation--work-decomposition-draft)
+-- [12. Pricing & Invoicing](#12-pricing--invoicing)
+-- [12A. Estimation & Work Decomposition](#12a-estimation--work-decomposition)
 - [13. Tools & Environments](#13-tools--environments)
 - [14. Dependencies & Assumptions](#14-dependencies--assumptions)
-- [15. Risk Management (Draft)](#15-risk-management-draft)
-- [16. Termination & Suspension (Placeholder)](#16-termination--suspension-placeholder)
-- [17. Dispute Resolution (Placeholder)](#17-dispute-resolution-placeholder)
+-- [15. Risk Management](#15-risk-management)
+-- [16. Termination & Suspension](#16-termination--suspension)
+-- [17. Dispute Resolution & Governing Law](#17-dispute-resolution--governing-law)
 
 ## 1. Purpose
 Outline the standard framework governing commercial collaboration between Selleris and its clients, ensuring clarity on scope, responsibilities, deliverables, communication, ownership, and compliance.
@@ -102,15 +106,15 @@ The following roles describe functional responsibilities only. Individual names 
 Notes:
 - Optional roles are engaged only when the task portfolio justifies their involvement.
 - A single individual may fulfill multiple roles in small-scale engagements.
-- Escalation Path (draft – to be finalized in Section 11 when escalation matrix is added): Support / Success → Delivery Manager → Technical Lead / Security (depending on nature) → Executive Sponsor (if required).
+- Escalation Path: Support / Success → Delivery Manager → Technical Lead or Security Lead (depending on nature) → Executive Sponsor (if required). Formal timing & triggers defined in Section 11.3.
 
 ## 4. Communication & Cadence
 - Authoritative Task Channel: All work, questions, change requests, incident reports, and clarifications MUST be created as tasks in the Selleris client portal `my.selleris.com`. This is the single system of record and the sole trigger for SLA timers.
 - Emergency Channel (Critical Only): A dedicated Microsoft Teams channel (or chat) may be used strictly for urgent coordination when a Critical priority issue (see Section 11) is actively impacting production or a committed milestone. The Teams channel does not replace the requirement to open / update the portal task; any verbal/chat notice must be followed by a portal task (or reference an existing one) without delay.
 - Prohibited Uses of Emergency Channel: Routine status queries, feature ideation, backlog grooming, or non-critical bug triage.
-- Cadence (Draft):
-	- Weekly or bi‑weekly operational sync (optional where async suffices).
-	- Monthly steering / roadmap review (for engagements > 2 months).
+- Cadence:
+	- Weekly or bi‑weekly operational sync (optional where async suffices; may be skipped if backlog clarity + throughput metrics are stable for > 4 consecutive weeks).
+	- Monthly steering / roadmap review (engagements > 2 months) focusing on velocity trends, rollover analysis, upcoming risk items.
 - Change Requests: Always logged as a task with type "Change"; impact (cost/time) assessment posted in task before client approval.
 - SLA Clock Mechanics: The first‑response SLA timer starts at the timestamp of task creation. It is reset (restarted) upon each new client comment that requires Selleris input. Internal Selleris comments do not reset SLA timers.
 - Business Hours (Authoritative): 09:00–18:00 Monday–Friday, Europe/Warsaw timezone (CET/CEST). Tasks created outside Business Hours are timestamped, but SLA hour counting begins at the next Business Hour boundary unless the task is legitimately Critical and notified through the Emergency Channel.
@@ -189,7 +193,7 @@ Escalation: If a client wishes a particular internal practice to become an accep
 Evolution: Selleris may adapt these internal practices at any time to reflect tooling, scale, or risk posture improvements. Adjustments do not retroactively change previously accepted work.
 
 ## 6. Quality & Testing
-- Code Standards: Internal engineering guidelines (public summary TBD).  
+- Code Standards (Public Summary): Selleris applies baseline engineering standards including automated linting/formatting, peer review for non‑trivial changes, proportionate automated or manual tests for new logic, secret & dependency vulnerability scanning, and alignment with each task’s explicit acceptance criteria. Internal detailed guidelines may evolve; deviations not impacting agreed acceptance criteria do not justify rejection.  
 - Testing Levels: Unit, integration, security scanning, performance (on demand).  
 - Defect Severity Levels & Remediation Targets defined below.  
 
@@ -368,7 +372,7 @@ Targets above are internal objectives (non-contractual unless a separate support
 Dependency manifests (and where supported, CycloneDX / SPDX outputs) can be provided upon request. Baseline SBOM generation occurs at major release checkpoints or monthly (whichever first) for active codebases under maintenance.
 
 ### 9.8 Certifications & Framework Alignment
-At time of this draft, formal third-party certifications (e.g., ISO 27001, SOC 2) may not be held. Practices are guided by principles consistent with widely adopted frameworks (least privilege, MFA, change control, secure SDLC). Should formal attestation be achieved later, updated references will be inserted without altering ownership terms.
+At time of publication, formal third-party certifications (e.g., ISO 27001, SOC 2) may not be held. Practices are guided by principles consistent with widely adopted frameworks (least privilege, MFA, change control, secure SDLC). Should formal attestation be achieved later, updated references will be inserted without altering ownership terms.
 
 ### 9.9 Client Responsibilities
 Security is a shared responsibility. Client must: (a) avoid transmitting unnecessary sensitive data into tasks or logs; (b) provision timely approvals for mitigations requiring configuration changes; (c) manage its own identity lifecycle for any client-owned accounts; (d) notify Selleris promptly of suspected credential compromise related to shared systems. Delays in these responsibilities may extend resolution targets proportionally.
@@ -377,9 +381,14 @@ Security is a shared responsibility. Client must: (a) avoid transmitting unneces
 Nothing in Sections 8 or 9 creates warranties or indemnities beyond those expressly stated elsewhere. These sections describe operational posture for transparency and collaboration efficiency.
 
 ## 10. Change Management
-- Change Request (CR) Structure: ID, description, rationale, impact, cost/time delta.  
-- Approval Flow: Draft – PO -> Selleris Delivery -> Mutual sign‑off.  
-TODO: Add turnaround time guidance.
+- Change Request (CR) Structure: Unique ID, description, rationale, impact (scope / cost / schedule / risk), proposed cost/time delta, and any updated acceptance criteria.  
+- Approval Flow: Selleris Product Owner / Delivery drafts → Client review & questions → Mutual written sign‑off in portal (task comment or designated approval field).  
+- Turnaround Targets (non-contractual unless a support addendum states otherwise):
+	- Acknowledgment of a submitted CR: ≤ 1 business day.
+	- Standard Impact & Effort Assessment (no significant external unknowns): ≤ 3 business days.
+	- Complex Assessment (material architecture impact, new third‑party integration uncertainty): ≤ 5 business days (client notified that complex window applies).
+	- Client clarification delays pause these timers until requested information is supplied.
+	- Accepted CRs receive updated labels/status for auditability; rejected CRs retain historical record with reason.
 
 ## 11. Service Levels
 
@@ -406,30 +415,53 @@ The first response is a substantive acknowledgment (not an automated receipt) in
 SLA Timing Rules (Business Hours Based):
 - Start: Timestamp of task creation in `my.selleris.com`; counting of SLA hours occurs only during defined Business Hours (09:00–18:00 Europe/Warsaw Mon–Fri). Example: A High priority task opened Friday 17:30 with a 4-hour SLA has 0.5 hours counted Friday, remaining 3.5 hours resume Monday 09:00.
 - Reset: Each new client comment that requires a Selleris answer restarts the response SLA for that task (previous SLA cycle closes upon Selleris answer or expiration). The restart follows the same Business Hours counting rule.
-- Suspension: Waiting on client data / access / clarification stops the SLA timer after Selleris has requested the needed input and labeled the task (label taxonomy TBD). Time between the suspension start and client-provided information is excluded from SLA calculation.
+- Suspension: Waiting on client data / access / clarification stops the SLA timer after Selleris has requested the needed input and labeled the task appropriately. Time between the suspension start and client-provided information is excluded from SLA calculation.
 - Aggregation: Multiple issues combined into one Critical ticket may be separated and reprioritized to reflect true impact.
 - Misprioritization: Reclassified tasks inherit a fresh SLA window from the reclassification timestamp.
 
 Business Hours Definition: Business Hours exclude weekends and Poland public holidays. Activity outside this window is classified as After-Hours for billing unless covered by a specific extended support agreement.
 
-### 11.3 Future Additions (Placeholders)
-- Resolution SLAs (dependent on agreed support tier) – TODO.
-- Workaround target times – TODO.
-- Escalation matrix & contact rotation – TODO.
+### 11.3 Resolution & Escalation (Formalized)
+The following Resolution & Workaround Targets are contractual baseline commitments for incident / defect tasks (excluding feature development) during Business Hours, subject to: (a) timely client cooperation, (b) availability of required access/data, (c) absence of blocking third‑party platform outages outside Selleris’ reasonable control, (d) force majeure exclusions. Delays attributable to client or external dependencies pause the applicable target window upon written notice in the task.
 
-Misuse & Reclassification: Selleris will communicate the rationale when downgrading a priority. Repeated emergency channel use for non‑Critical matters may result in limited access or enforced cooling-off practices.
+| Priority | Workaround / Stabilization Target (Business Hours) | Resolution Target (Business Days) | Notes |
+|----------|-----------------------------------------------------|-----------------------------------|-------|
+| Critical | ≤ 4 hours (containment, mitigation, or rollback)    | ≤ 2 business days OR interim plan agreed | Continuous effort until stabilized; after‑hours may apply at elevated rate if client authorizes or emergency qualifies. |
+| High     | Best effort same Business Day (no strict hour cap)  | ≤ 5 business days                 | Escalated if credible risk of becoming Critical. |
+| Normal   | Not required (use acceptance criteria scheduling)   | Next planned sprint (≤ 15 business days) | Bundled with regular delivery cadence. |
+| Low      | Not required                                        | Opportunistic (no guaranteed date) | May be grouped into quality batches. |
 
-TODO: Add business hours & holiday calendar reference once finalized.
+Workaround Targets mirror Severity remediation principles (Section 6). Separate workaround tables are not required. If a committed Resolution Target cannot be met, Selleris will (before expiry) propose a revised ETA plus mitigating steps; client may request escalation.
 
-## 12. Pricing & Invoicing (Draft)
+#### Escalation Matrix & Timing (Critical Issues)
+Escalation Path: Support / Success → Delivery Manager → Technical Lead or Security Lead → Executive Sponsor.
+
+| Escalation Tier | Trigger (Elapsed From Critical Task Creation Without Sufficient Stabilization) | Expected Action |
+|-----------------|--------------------------------------------------------------------------------|-----------------|
+| Support / Success | Time 0 | Initial triage, confirm reproduction, ensure task metadata complete. |
+| Delivery Manager | ≤ 1 hour | Coordinate resources, confirm mitigation owner, update client ETA. |
+| Technical Lead / Security Lead | ≤ 2 hours | Deep technical remediation guidance, risk reassessment, approve containment strategy. |
+| Executive Sponsor | ≤ 4 hours OR earlier if contractual milestone jeopardized | Executive visibility, resource reallocation authorization, potential scope trade-off decisions. |
+
+If a Critical issue remains unresolved (no sustainable mitigation) at 1 full Business Day, a formal post‑incident action plan is drafted and shared within the next Business Day.
+
+#### Suspension of SLA Timers
+SLA and Resolution clocks are suspended when Selleris has explicitly requested (in-task) required client input (e.g., credentials, additional logs, approval to apply rollback) and such input is pending. Suspension start/stop timestamps are recorded via task comments or labels.
+
+#### Business Hours & Holiday Reference
+Business Hours: 09:00–18:00 (Europe/Warsaw) Monday–Friday excluding Polish national public holidays as officially published annually by the Government of Poland. Work outside these hours follows After-Hours billing rules (Section 12) unless covered by a separately agreed extended support addendum.
+
+Misuse & Reclassification: Selleris will communicate rationale when downgrading a priority. Repeated emergency channel use for non‑Critical matters may lead to moderated access or defined cool‑off procedures.
+
+## 12. Pricing & Invoicing
 - Base Hourly Rate: EUR 60 per hour ("Base Hourly Rate") unless otherwise specified in a separately executed contract or addendum.
 - After-Hours / Overtime Rate: 2× Base Hourly Rate (EUR 120/hour) for: (a) any work performed outside Business Hours (Section 4), (b) weekends, and (c) Poland public holidays, except where the parties have agreed to an alternative support retainer or fixed extended coverage.
-- Billing Models: Time & Materials (hourly / daily), Fixed Scope milestones, Retainer packages.  
-- Invoicing Frequency: TODO (e.g., monthly in arrears for T&M; milestone-based for Fixed Scope).  
+- Billing Models: Time & Materials (hourly / daily), Project Stage (fixed scope milestone), optional Retainer (if expressly agreed as structured Stage series).  
+- Invoicing Frequency (T&M): Monthly in arrears for all T&M tasks Confirmed within the calendar month; Project Stage invoices per Section 12.4.2.  
 - Payment Terms: Defined per model below (Section 12.4).  
-- Expenses: Pre‑approved only; pass-through at cost with receipts (draft).  
-- Currency: EUR is default; alternative currency requires prior written agreement (FX risk allocation TBD).  
-- Rate Changes: Selleris may adjust standard rates with 30 days written notice; locked rates in active SOWs remain until SOW completion or renewal.
+- Expenses: Pre‑approved only; pass-through at cost with receipts.  
+- Currency: EUR is default; alternative currency requires prior written agreement (FX risk allocation: client bears FX risk on payments made in non-agreed currency; bank fees not deducted from invoice amount).  
+- Rate Changes: Selleris may adjust standard rates with 30 days written notice; locked rates in active SOWs remain until Stage / SOW completion or renewal.
 - Minimum Billing Increment (Authoritative): 2 hours. Any task estimated at or below 2 hours is billed as 2 hours (XS size) and may be started without additional client approval.
 
 ### 12.1 Task Acceptance & Authorization Rules
@@ -448,9 +480,7 @@ The 2-hour minimum covers: context switching, environment preparation, coordinat
 
 Overtime Authorization: Non-Critical after-hours work requires explicit written authorization in the relevant task prior to commencement; absence of objection to an informational notice does not constitute approval.
 
-Late Payment Handling (Placeholder): Interest, suspension triggers, and reactivation fees to be defined.
-
-TODO: Finalize invoicing schedule, payment term, late fee policy, tax treatment (e.g., VAT applicability).
+Late Payment Handling (Final): Undisputed overdue amounts accrue statutory late payment interest for commercial transactions as defined under Polish law implementing Directive 2011/7/EU (EU Late Payment Directive). Interest accrues daily from the day after the Due Date until receipt. Selleris may add an administrative fixed compensation fee if permitted by applicable law. If payment for an undisputed invoice is not received within 30 calendar days after the Due Date, Selleris may (a) suspend commencement of new tasks, and after 5 Business Days written notice (b) pause non‑Critical in‑flight work. Two consecutive undisputed unpaid invoices (beyond their respective 30-day post‑Due Date thresholds) allow immediate suspension excluding active Critical mitigation. Reactivation requires settlement of all overdue undisputed amounts plus a EUR 250 reactivation fee (unless waived in writing).
 
 ### 12.4 Payment Models
 Clients may freely choose either (or both concurrently) of the following payment models. A task is associated with exactly one model at creation via a required classification field (e.g., label: `T&M` or `Project`).
@@ -474,11 +504,11 @@ Clients may freely choose either (or both concurrently) of the following payment
 #### 12.4.2 Project (Milestone / Stage) Model
 - Use Case: Larger, well-defined feature sets or phases where upfront commitment benefits planning.
 - Stage Definition: A Stage groups a fixed set of tasks with clear acceptance criteria and a consolidated estimate (sum of constituent tasks; each still independently tracked).
-- Estimation & Approval Flow: (a) Draft stage task list + assumptions; (b) Consolidated hour estimate + risk notes; (c) Client approval (written confirmation in portal); (d) Commercial terms locked for the Stage scope.
+- Estimation & Approval Flow: (a) Stage task list + assumptions draft; (b) Consolidated hour estimate + risk notes; (c) Client approval (written confirmation in portal); (d) Commercial terms locked for the Stage scope.
 - Payment Structure: 50% upfront (invoice issued immediately upon Stage approval, payable before execution begins) and 50% upon acceptance of all Stage tasks (final invoice issued after last task marked Accepted).
 - Scope Integrity: Adds / changes after approval form a Change Request either (a) added to a subsequent Stage, or (b) explicitly appended with revised financials (requires mutual written consent).
 - Acceptance: Stage considered accepted when every Stage task is in Accepted (or explicitly waived) status. Minor residual non-blocking adjustments may be tracked as new T&M tasks if both parties agree.
-- Non-Acceptance: If acceptance is withheld, client must provide a consolidated defect / gap list within 5 business days; unresolved silence after that window may trigger deemed acceptance (optional—TBD if adopted contractually).
+- Non-Acceptance: If acceptance is withheld, client must provide a consolidated defect / gap list within 5 business days; unresolved silence after that window may trigger deemed acceptance only if an explicit deemed acceptance clause exists in a governing Stage agreement.
 
 #### 12.4.3 Mixed Model Operation
 - Coexistence: A client may maintain simultaneous T&M flow for incremental improvements while executing one or more Project Stages in parallel.
@@ -498,12 +528,12 @@ Clients may freely choose either (or both concurrently) of the following payment
 - Choose Project for predictable, contiguous work packages with defined ROI / release goals.
 - Use Mixed when a strategic initiative (Project) runs while continuous improvements (T&M) must not stall.
 
-#### 12.4.6 Financial Governance Notes (Draft)
+#### 12.4.6 Financial Governance Notes
 - Upfront Stage payment is non-refundable except where Selleris fails to initiate Stage work within an agreed reasonable start window.
 - Material Stage underspend (if actual effort < 80% of estimate) may be converted—subject to mutual agreement—into T&M credit or applied to the next Stage.
 - Stage overrun risk must be signaled immediately if forecast effort > 110% of estimate; client options: descoping, CR, or conversion of remainder to T&M.
 
-TODO: Define late payment interest rate & suspension thresholds.
+Late Payment Interest & Suspension Thresholds: See Section 12 (Late Payment Handling). Suspension threshold: 30 calendar days after Due Date for an undisputed invoice. Consecutive invoice rule: two unpaid undisputed invoices → immediate suspension (excluding Critical mitigation). Reactivation Fee: EUR 250.
 
 #### 12.4.7 Month-End Rollover Governance (Extended Tasks)
 This governance clarifies boundaries around the Partial Completions policy:
@@ -514,7 +544,7 @@ This governance clarifies boundaries around the Partial Completions policy:
 - Transparency Option: Client may request conversion of the remainder into a Stage (Project Model) if predictability is desired.
 - Metrics & Continuous Improvement: If rollover rate breaches a jointly agreed KPI threshold, a corrective action plan (CAP) is drafted.
 
-## 12A. Estimation & Work Decomposition (Draft)
+## 12A. Estimation & Work Decomposition
 
 ### 12A.1 T‑Shirt Size Mapping (Indicative)
 | Size | Effort Band (Engineering Hours) | Billing Treatment | Typical Use | Decomposition Guidance |
@@ -659,34 +689,79 @@ Over time, Selleris may publish aggregate metrics (e.g. average actual vs estima
 Percentages are baselines, not hard caps in abnormal complexity contexts (e.g. regulated environments); any variance requires explicit pre-approval.
 
 ## 13. Tools & Environments
-- Source Control: Git-based (platform TBD if externally visible).  
-- Tracking: Issue/project management platform (TBD).  
-- Knowledge Base: This repository (public subset) + private internal docs.  
-TODO: Add access provisioning workflow.
+- Source Control: Git-based (GitHub Enterprise unless client mandates alternative).  
+- Tracking: Selleris client portal + GitHub Projects V2.  
+- Knowledge Base: This repository (public subset) + private internal docs.
+Access Provisioning Workflow:
+1. Client requests access specifying purpose & role.
+2. Role mapped to predefined permission profile (least privilege) maintained internally.
+3. Approval by Delivery Manager (Security Lead for elevated scopes).
+4. Access granted via centralized identity (Entra ID / GitHub Enterprise); secrets handled via Key Vault (no plaintext secret distribution).
+5. Quarterly access review; revocation within 1 Business Day of role change or termination notice.
+All provisioning and revocation actions are logged (Azure AD / GitHub audit logs).
 
 ## 14. Dependencies & Assumptions
-| Assumption | Rationale | Risk if False | Mitigation (Draft) |
-|------------|-----------|--------------|--------------------|
-| Timely stakeholder feedback | Maintains iteration velocity | Delays & rework | Escalation path |
-| Stable scope within iteration | Protects sprint commitments | Velocity disruption | CR process |
-| Access to required test data | Enables validation | Blocked releases | Provide sanitized dataset |
+| Assumption | Rationale | Risk if False | Mitigation |
+|------------|-----------|--------------|-----------|
+| Timely stakeholder feedback | Maintains iteration velocity | Delays & rework | Escalation path (Section 11.3) |
+| Stable scope within iteration | Protects sprint commitments | Velocity disruption | CR process (Section 10) |
+| Access to required test data & non-production credentials | Enables validation & reduces production risk | Blocked releases, incomplete testing | Provide sanitized dataset early; escalate after 2 bd delay |
+| Single empowered client decision owner | Avoids conflicting direction | Rework, stalled tasks | Pause task until alignment provided |
+| Third-party services stable & accessible | Integration reliability | Schedule slippage | Early spike tasks; contingency buffers |
+| Acceptance feedback within 5 business days | Allows billing & flow continuity | Billing / closure delays | Deemed acceptance (Section 12.4.1 partial rollover) if only feedback pending |
+| Required licenses provided by client | Legal compliance & functionality | Blocked implementation | Clarify during Task Preparation |
+| Security approvals timely (where client-controlled infra) | Enables deployment | Environment drift / backlog pile-up | Escalation to Delivery Manager after 2 bd |
 
-TODO: Add more operational assumptions.
+Assumption breaches may proportionally extend related Resolution or delivery targets; Selleris will document impact in the affected task.
 
-## 15. Risk Management (Draft)
-- Identification: During planning and retrospectives.  
-- Tracking: Risk register (private).  
-- Categories: Delivery, Technical, Compliance, Security.  
-TODO: Add risk severity matrix.
+## 15. Risk Management
+- Identification: During planning, backlog refinement, and retrospectives; ad hoc for emerging incidents.  
+- Tracking: Private risk register referencing task IDs where mitigation logged.  
+- Categories: Delivery, Technical, Compliance, Security, Third-Party Dependency, Operational.  
 
-## 16. Termination & Suspension (Placeholder)
-- Termination Rights: TBD (e.g., notice period, material breach).  
-- Suspension Conditions: Non-payment, security concern (draft).  
-TODO: Add data return / transition assistance language.
+### 15.1 Risk Severity Matrix
+Impact (1–5): 1 negligible, 2 low, 3 moderate, 4 high, 5 critical (regulatory/legal/major financial or reputational).  
+Likelihood (1–5): 1 rare, 2 unlikely, 3 possible, 4 likely, 5 frequent.  
+Risk Score = Impact × Likelihood.
 
-## 17. Dispute Resolution (Placeholder)
-Draft: Good faith negotiation -> escalation -> mediation/arbitration (jurisdiction TBD).  
-TODO: Define preferred governing law / venue.
+| Score Band | Classification | Action |
+|------------|---------------|--------|
+| 1–6 | Low | Monitor; no dedicated mitigation task unless trend changes |
+| 7–12 | Moderate | Planned mitigation / acceptance decision documented |
+| 13–19 | High | Active mitigation tasks with owners & target dates |
+| 20–25 | Critical | Executive visibility; expedited mitigation & post‑mitigation review |
+
+Review Cadence: Quarterly portfolio review; Critical emergent risks reviewed within 2 Business Days. Post‑incident root cause tasks link back to closed risk items for traceability.
+
+## 16. Termination & Suspension
+### 16.1 Termination for Convenience
+Either party may terminate these Cooperation Terms (prospective effect only) with 60 days written notice. Tasks / Stages already accepted or in execution at notice issuance proceed unless mutually agreed to abort or wind down.
+
+### 16.2 Termination for Cause
+Either party may terminate on written notice if the other party materially breaches these Terms (including undisputed non‑payment) and fails to cure within 14 days of receiving a detailed written notice specifying the breach. Immediate termination (without cure period) is permitted for: (a) insolvency / bankruptcy filing, (b) willful unauthorized disclosure of Confidential Information, (c) intentional security breach or tampering, (d) infringement of IP rights after written demand to cease.
+
+### 16.3 Suspension
+Selleris may suspend (a) performance of non‑Critical tasks for undisputed invoices overdue by 30 days after Due Date; (b) specific activities that would contravene documented security policies; (c) execution creating material risk (after notifying client with remediation steps). Suspension excludes active Critical mitigation unless payment delinquency persists beyond a second consecutive unpaid invoice threshold.
+
+### 16.4 Data Return & Transition
+Upon termination or client written request within 30 days thereof, Selleris will provide or confirm availability of migration artifacts per Section 7.9 (source snapshot, environment variable map, logical topology if previously produced, data export guidance). Additional hands‑on transition assistance is billable T&M unless covered by a Stage.
+
+### 16.5 Effect of Termination
+Accrued but unpaid undisputed fees remain due. Sections 6.1 table definitions, 7.3–7.11, 8, 9, 12 (payment obligations), 16.4, and 17 survive termination. Convenience termination does not revoke licenses granted prior to effective termination date subject to payment.
+
+## 17. Dispute Resolution & Governing Law
+### 17.1 Governing Law
+These Cooperation Terms and any non‑contractual obligations arising out of or in connection with them are governed by the laws of Poland, excluding conflict of law rules.
+
+### 17.2 Escalation & Courts (Variant A – Courts)
+1. Internal Negotiation: Parties first attempt in good faith to resolve disputes via discussions between the Delivery Manager and the Client’s designated counterpart.
+2. Management Escalation: If unresolved after 15 Business Days, escalation to senior management representatives occurs (remote meeting or written exchange).
+3. Court Jurisdiction: If still unresolved 15 Business Days after management escalation initiation, either party may submit the dispute to the competent common courts having jurisdiction in Warsaw, Poland. Proceedings shall be conducted in Polish; by mutual written agreement specific filings or evidence may be submitted in English.
+
+Nothing prevents a party from seeking interim injunctive or protective relief (including to protect IP or Confidential Information) in any competent court.
+
+### 17.3 Language
+Authoritative language of these Terms: English (operational) with legal proceedings conducted in Polish if required by the competent courts.
 
 ---
-Feedback: Please consolidate suggested edits and submit internally before publishing externally.
+Document History: Finalized version with all prior draft placeholders resolved (date of last update committed in repository history). Future revisions supersede conflicting provisions prospectively.
