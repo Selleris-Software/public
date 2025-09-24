@@ -22,13 +22,13 @@ These Cooperation Terms form the operational baseline and supersede prior inform
 - [9. Security & Compliance](#9-security--compliance)
 - [10. Change Management](#10-change-management)
 - [11. Service Levels](#11-service-levels)
--- [12. Pricing & Invoicing](#12-pricing--invoicing)
--- [12A. Estimation & Work Decomposition](#12a-estimation--work-decomposition)
-- [13. Tools & Environments](#13-tools--environments)
-- [14. Dependencies & Assumptions](#14-dependencies--assumptions)
--- [15. Risk Management](#15-risk-management)
--- [16. Termination & Suspension](#16-termination--suspension)
--- [17. Dispute Resolution & Governing Law](#17-dispute-resolution--governing-law)
+- [12. Pricing & Invoicing](#12-pricing--invoicing)
+- [13. Estimation & Work Decomposition](#13-estimation--work-decomposition)
+- [14. Tools & Environments](#14-tools--environments)
+- [15. Dependencies & Assumptions](#15-dependencies--assumptions)
+- [16. Risk Management](#16-risk-management)
+- [17. Termination & Suspension](#17-termination--suspension)
+- [18. Dispute Resolution & Governing Law](#18-dispute-resolution--governing-law)
 
 ## 1. Purpose
 Outline the standard framework governing commercial collaboration between Selleris and its clients, ensuring clarity on scope, responsibilities, deliverables, communication, ownership, and compliance.
@@ -469,7 +469,7 @@ Misuse & Reclassification: Selleris will communicate rationale when downgrading 
 - Approval Required: Tasks estimated > 2 hours require explicit written client approval (task comment stating approval) prior to commencement.
 - Overrun Safeguard: If during execution of an XS task it becomes clear that total effort will exceed 2 hours, Selleris pauses at (or as near as practicable to) the 2-hour mark and posts a revised estimate for approval before proceeding.
 - Bundling Prohibition: Related but separable XS tasks must not be aggregated artificially to bypass approval processes.
-- Task Project Preparation (Pre-Approval Work): For tasks > 2 hours, an initial "Task Project Draft" may be prepared (see Section 12A.8) to refine scope, acceptance criteria, dependencies, and high-level technical approach. This preparatory effort is capped by default at 10% of the proposed base implementation effort and is billable even if the client declines the full implementation estimate (because a discrete analysis & scoping artifact is delivered). If the client wishes NOT to authorize this preparatory analysis for a specific task, that intent must be stated explicitly before work begins.
+- Task Project Preparation (Pre-Approval Work): For tasks > 2 hours, an initial "Task Project Draft" may be prepared (see Section 13.8) to refine scope, acceptance criteria, dependencies, and high-level technical approach. This preparatory effort is capped by default at 10% of the proposed base implementation effort and is billable even if the client declines the full implementation estimate (because a discrete analysis & scoping artifact is delivered). If the client wishes NOT to authorize this preparatory analysis for a specific task, that intent must be stated explicitly before work begins.
 
 ### 12.2 Estimation Transparency
 - Estimate Format: Each task includes (a) T‑shirt size, (b) indicative hour range (if > XS), (c) key assumptions, and (d) risk factors if material.
@@ -537,16 +537,16 @@ Late Payment Interest & Suspension Thresholds: See Section 12 (Late Payment Hand
 
 #### 12.4.7 Month-End Rollover Governance (Extended Tasks)
 This governance clarifies boundaries around the Partial Completions policy:
-- Proper Sizing Principle: Rollover is an exception, not a planning tool; tasks should normally conform to Section 12A sizing.
+- Proper Sizing Principle: Rollover is an exception, not a planning tool; tasks should normally conform to Section 13 sizing.
 - Non-Eligible Causes: Overscoping, avoidable internal delays, or lack of proactive decomposition by Selleris.
 - Eligible Causes: Awaiting client domain clarification, pending stakeholder approval, delayed test data, external vendor API outage.
 - Documentation Requirements: Rollover Note must include (a) link to original task, (b) list of delivered acceptance criteria, (c) list of pending criteria with rationale, (d) hour tally, (e) revised estimate for remainder.
 - Transparency Option: Client may request conversion of the remainder into a Stage (Project Model) if predictability is desired.
 - Metrics & Continuous Improvement: If rollover rate breaches a jointly agreed KPI threshold, a corrective action plan (CAP) is drafted.
 
-## 12A. Estimation & Work Decomposition
+## 13. Estimation & Work Decomposition
 
-### 12A.1 T‑Shirt Size Mapping (Indicative)
+### 13.1 T‑Shirt Size Mapping (Indicative)
 | Size | Effort Band (Engineering Hours) | Billing Treatment | Typical Use | Decomposition Guidance |
 |------|---------------------------------|-------------------|-------------|------------------------|
 | XS | 2h fixed (minimum billable) | Auto-approved, billed as 2h | Minor bug fix, small config, copy tweak, simple query/report | Combine only if logically atomic outcome; else keep separate |
@@ -561,10 +561,10 @@ Notes:
 - A single task should not exceed ~30% of an individual contributor's two-week sprint capacity to preserve flow and enable parallelism.
 - XL tasks require an explicit decomposition attempt log (short justification why further split degrades value). XXL must be decomposed—no exceptions.
 
-### 12A.2 Sprint Fit Rule
+### 13.2 Sprint Fit Rule
 All tasks must fit inside a standard two-week sprint (10 business days). If not feasible, they are decomposed until each resulting task: (a) provides a testable slice of value, (b) has discrete acceptance criteria, (c) does not create hidden coupling with sibling tasks.
 
-### 12A.3 Recommended Decomposition Strategies
+### 13.3 Recommended Decomposition Strategies
 1. Vertical Slicing: Deliver an end-to-end thin functional path (UI → API → persistence) instead of layered horizontal cuts.
 2. Risk-First: Isolate the highest technical or integration risk component early to fail fast.
 3. Interface Stubs: Create stable interfaces / contracts first; subsequent tasks implement internal logic.
@@ -572,21 +572,21 @@ All tasks must fit inside a standard two-week sprint (10 business days). If not 
 5. Data Migration Separation: Migration scripts / data backfill tracked as distinct tasks from feature logic.
 6. Observability as Separate Task: Metrics / logging enhancements can be split if they would block feature delivery.
 
-### 12A.4 Estimation Quality Practices
+### 13.4 Estimation Quality Practices
 - Use historical velocity and actuals to calibrate future ranges.
 - Record actual effort for M and above to enable continuous improvement.
 - Flag High Uncertainty (HU) when assumptions exceed an agreed threshold (e.g., unknown third-party API); plan a spike (time-boxed XS/S) before committing to full estimate.
 
-### 12A.5 Re-Estimation Triggers
+### 13.5 Re-Estimation Triggers
 - Scope increase or acceptance criteria expansion.
 - Architectural pivots or dependency changes.
 - External integration instability discovered mid-task.
 - Performance or security hardening beyond originally assumed baseline.
 
-### 12A.6 Out-of-Band Changes
+### 13.6 Out-of-Band Changes
 If an in-progress task requires material direction change, it is paused and split: original task closed with delivered subset; new tasks capture remaining or altered scope to protect traceability.
 
-### 12A.7 Client Collaboration
+### 13.7 Client Collaboration
 Clients are encouraged to challenge over-large tasks; early discussion reduces rework and preserves throughput.
 #### Example Decomposition: "Self-Service Password Reset" Feature
 Client User Story (raw): "As a user I want to reset my password via email so I can regain access without contacting support."  
@@ -633,10 +633,10 @@ Change Handling:
 
 Outcome: The client can approve granular scope with transparent overhead rationale instead of a single opaque 24–50h block.
 
-### 12A.8 Estimation Workflow & Cost Composition
+### 13.8 Estimation Workflow & Cost Composition
 This subsection clarifies how Selleris structures task estimation and communicates cost components to maintain transparency.
 
-#### 12A.8.1 Stages of a Task
+#### 13.8.1 Stages of a Task
 1. Task Project Preparation (Scoping Draft)
 	- Input: Client user story / raw requirement.
 	- Output: Refined task using minimal acceptance criteria (Section 5.1), clarified assumptions, preliminary sizing.
@@ -651,7 +651,7 @@ This subsection clarifies how Selleris structures task estimation and communicat
 	- Planning, coordination, stakeholder updates, progress reporting, task state hygiene in GitHub Projects, scheduling of code reviews, risk tracking.
 	- Standard Allocation: 20% of E (PM = 0.20E).  
 
-#### 12A.8.2 Formula Summary
+#### 13.8.2 Formula Summary
 Base Dev Effort (E)  
 Preparation (Prep) = 0.10E  
 Testing (Test) = 0.10E  
@@ -660,35 +660,35 @@ Total Indicative Effort = E + 0.10E + 0.10E + 0.20E = 1.40E
 
 Example: If E = 10h → Total = 14h (Prep 1h, Implementation 10h, Testing 1h, PM 2h).  
 
-#### 12A.8.3 XS Tasks (≤ 2h)
+#### 13.8.3 XS Tasks (≤ 2h)
 - The 2-hour minimum billing quantum already encompasses preparation, implementation, testing, and PM overhead for genuinely small changes.
 - If overhead alone would exceed the minimum (rare edge case), the task should be reclassified and re-estimated as S.
 
-#### 12A.8.4 Transparency in Estimates
+#### 13.8.4 Transparency in Estimates
 Estimates for tasks larger than XS include a breakdown line showing:  
 "Base Dev: E h | Prep 10%: 0.10E | Test 10%: 0.10E | PM 20%: 0.20E | Total: 1.40E h".
 
 If any component deviates from defaults (e.g. Testing 25% due to complex data validation), the deviation and reason must be explicitly noted.
 
-#### 12A.8.5 Declined Implementation Scenarios
+#### 13.8.5 Declined Implementation Scenarios
 If the client declines to proceed with implementation after the Task Project Preparation stage:
 - Only the Preparation component (actual time, capped at 10% of proposed E) is billed.
 - The scoping artifact remains accessible to the client and may be reused in a future task or Stage.
 
-#### 12A.8.6 Re-Estimation Impact
-When task scope changes enough to trigger re-estimation (Section 12A.5), percentage components are recalculated against the new Base Dev Effort. Previously incurred preparation remains billed; no retroactive adjustment is made.
+#### 13.8.6 Re-Estimation Impact
+When task scope changes enough to trigger re-estimation (Section 13.5), percentage components are recalculated against the new Base Dev Effort. Previously incurred preparation remains billed; no retroactive adjustment is made.
 
-#### 12A.8.7 Portfolio View
+#### 13.8.7 Portfolio View
 Over time, Selleris may publish aggregate metrics (e.g. average actual vs estimated prep %, test %, PM %) to improve forecasting accuracy. Clients can request these metrics during quarterly reviews.
 
-#### 12A.8.8 Rationale for Overhead Percentages
+#### 13.8.8 Rationale for Overhead Percentages
 - Preparation 10%: Ensures sufficient discovery to avoid rework while keeping friction low.
 - Testing 10%: Baseline reinforcement of quality; incentivizes thin vertical slicing which naturally limits test surface area.
 - PM 20%: Covers coordination overhead for asynchronous communication, status curation, backlog hygiene, and risk surfacing—especially important in multi-task concurrent flows.
 
 Percentages are baselines, not hard caps in abnormal complexity contexts (e.g. regulated environments); any variance requires explicit pre-approval.
 
-## 13. Tools & Environments
+## 14. Tools & Environments
 - Source Control: Git-based (GitHub Enterprise unless client mandates alternative).  
 - Tracking: Selleris client portal + GitHub Projects V2.  
 - Knowledge Base: This repository (public subset) + private internal docs.
@@ -700,7 +700,7 @@ Access Provisioning Workflow:
 5. Quarterly access review; revocation within 1 Business Day of role change or termination notice.
 All provisioning and revocation actions are logged (Azure AD / GitHub audit logs).
 
-## 14. Dependencies & Assumptions
+## 15. Dependencies & Assumptions
 | Assumption | Rationale | Risk if False | Mitigation |
 |------------|-----------|--------------|-----------|
 | Timely stakeholder feedback | Maintains iteration velocity | Delays & rework | Escalation path (Section 11.3) |
@@ -714,12 +714,12 @@ All provisioning and revocation actions are logged (Azure AD / GitHub audit logs
 
 Assumption breaches may proportionally extend related Resolution or delivery targets; Selleris will document impact in the affected task.
 
-## 15. Risk Management
+## 16. Risk Management
 - Identification: During planning, backlog refinement, and retrospectives; ad hoc for emerging incidents.  
 - Tracking: Private risk register referencing task IDs where mitigation logged.  
 - Categories: Delivery, Technical, Compliance, Security, Third-Party Dependency, Operational.  
 
-### 15.1 Risk Severity Matrix
+### 16.1 Risk Severity Matrix
 Impact (1–5): 1 negligible, 2 low, 3 moderate, 4 high, 5 critical (regulatory/legal/major financial or reputational).  
 Likelihood (1–5): 1 rare, 2 unlikely, 3 possible, 4 likely, 5 frequent.  
 Risk Score = Impact × Likelihood.
@@ -733,34 +733,34 @@ Risk Score = Impact × Likelihood.
 
 Review Cadence: Quarterly portfolio review; Critical emergent risks reviewed within 2 Business Days. Post‑incident root cause tasks link back to closed risk items for traceability.
 
-## 16. Termination & Suspension
-### 16.1 Termination for Convenience
+## 17. Termination & Suspension
+### 17.1 Termination for Convenience
 Either party may terminate these Cooperation Terms (prospective effect only) with 60 days written notice. Tasks / Stages already accepted or in execution at notice issuance proceed unless mutually agreed to abort or wind down.
 
-### 16.2 Termination for Cause
+### 17.2 Termination for Cause
 Either party may terminate on written notice if the other party materially breaches these Terms (including undisputed non‑payment) and fails to cure within 14 days of receiving a detailed written notice specifying the breach. Immediate termination (without cure period) is permitted for: (a) insolvency / bankruptcy filing, (b) willful unauthorized disclosure of Confidential Information, (c) intentional security breach or tampering, (d) infringement of IP rights after written demand to cease.
 
-### 16.3 Suspension
+### 17.3 Suspension
 Selleris may suspend (a) performance of non‑Critical tasks for undisputed invoices overdue by 30 days after Due Date; (b) specific activities that would contravene documented security policies; (c) execution creating material risk (after notifying client with remediation steps). Suspension excludes active Critical mitigation unless payment delinquency persists beyond a second consecutive unpaid invoice threshold.
 
-### 16.4 Data Return & Transition
+### 17.4 Data Return & Transition
 Upon termination or client written request within 30 days thereof, Selleris will provide or confirm availability of migration artifacts per Section 7.9 (source snapshot, environment variable map, logical topology if previously produced, data export guidance). Additional hands‑on transition assistance is billable T&M unless covered by a Stage.
 
-### 16.5 Effect of Termination
+### 17.5 Effect of Termination
 Accrued but unpaid undisputed fees remain due. Sections 6.1 table definitions, 7.3–7.11, 8, 9, 12 (payment obligations), 16.4, and 17 survive termination. Convenience termination does not revoke licenses granted prior to effective termination date subject to payment.
 
-## 17. Dispute Resolution & Governing Law
-### 17.1 Governing Law
+## 18. Dispute Resolution & Governing Law
+### 18.1 Governing Law
 These Cooperation Terms and any non‑contractual obligations arising out of or in connection with them are governed by the laws of Poland, excluding conflict of law rules.
 
-### 17.2 Escalation & Courts (Variant A – Courts)
+### 18.2 Escalation & Courts (Variant A – Courts)
 1. Internal Negotiation: Parties first attempt in good faith to resolve disputes via discussions between the Delivery Manager and the Client’s designated counterpart.
 2. Management Escalation: If unresolved after 15 Business Days, escalation to senior management representatives occurs (remote meeting or written exchange).
 3. Court Jurisdiction: If still unresolved 15 Business Days after management escalation initiation, either party may submit the dispute to the competent common courts having jurisdiction in Warsaw, Poland. Proceedings shall be conducted in Polish; by mutual written agreement specific filings or evidence may be submitted in English.
 
 Nothing prevents a party from seeking interim injunctive or protective relief (including to protect IP or Confidential Information) in any competent court.
 
-### 17.3 Language
+### 18.3 Language
 Authoritative language of these Terms: English (operational) with legal proceedings conducted in Polish if required by the competent courts.
 
 ---
