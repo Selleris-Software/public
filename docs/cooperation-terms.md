@@ -4,7 +4,7 @@ Intended Audience: Prospective and current clients
 Language: English (authoritative)  
 
 Legal Entity (Supplier): Selleris spółka z ograniczoną odpowiedzialnością (Selleris sp. z o.o.)  
-Registered Address: ul. Artyleryjska 35, 03-276 Warsaw, Poland  
+Registered Address: al. Jerozolimskie 181, 02-222 Warsaw, Poland  
 KRS: 0000690620  |  REGON: 368051966  |  NIP (VAT ID): 7010709991  
 All rates are exclusive of VAT. Where applicable, VAT will be added pursuant to Polish and EU tax regulations (reverse charge applies to eligible intra‑EU B2B customers outside Poland with a valid VAT ID). Client is responsible for any withholding taxes; gross‑up not included unless mandated by law.
 
