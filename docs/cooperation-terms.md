@@ -8,8 +8,6 @@ Registered Address: ul. Artyleryjska 35/2, 03-276 Warsaw, Poland
 KRS: 0000690620  |  REGON: 368051966  |  NIP (VAT ID): 7010709991  
 All rates are exclusive of VAT. Where applicable, VAT will be added pursuant to Polish and EU tax regulations (reverse charge applies to eligible intra‑EU B2B customers outside Poland with a valid VAT ID). Client is responsible for any withholding taxes; gross‑up not included unless mandated by law.
 
-These Cooperation Terms form the operational baseline and supersede prior informal process descriptions. Earlier references to “draft”, “placeholder”, or “TBD” in previous iterations are no longer applicable.
-
 ## Table of Contents
 - [1. Purpose](#1-purpose)
 - [2. Scope of Engagement](#2-scope-of-engagement)
